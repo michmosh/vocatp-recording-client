@@ -1,0 +1,45 @@
+.rightFormPanelWrapper{
+    .inputText{
+        label{
+            transform-origin: right !important;
+            left: inherit !important;
+            right: 1.75rem !important; 
+            line-height: 3;
+        }
+    }
+
+}
+.leftFormPanelWrapper{
+    padding:1rem;
+    .title{
+        border-bottom: 1px solid grey;
+    }
+    .newParticipantInput{
+        display: flex;
+        gap:1rem;
+    }
+    .addParticipantButton{
+        align-self: end;
+        height:3.5rem;
+    }
+    .participantsList{
+        padding: 1rem;
+        .participantsListItem{
+            display: flex;
+            gap:1rem;
+            & .participantsListItemContent{
+                display: flex;
+                gap: 1rem;
+                flex-basis: 25%;
+            }
+        }
+    }
+    .inputText{
+        label{
+            // transform-origin: right !important;
+            // left: inherit !important;
+            // right: 1.75rem !important; 
+            line-height: 3;
+        }
+    }
+}

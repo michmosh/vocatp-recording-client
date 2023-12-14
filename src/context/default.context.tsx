@@ -1,0 +1,34 @@
+import React, { createContext, useReducer } from 'react';
+import { defaultReducer } from './reducer';
+export const DefaultContext: any = {
+    meeting:{
+        id:"",
+        topic:"",
+        leader:"",
+        date:"",
+        purpose: "",
+        transcriptor: "",
+        recipients:[],
+        clips:[],
+        rawStt:[]
+    },
+    recorder:{
+        test:"",
+        status:{
+            recording:false
+        }
+    }
+}
+const dispatch: React.Dispatch<any> = () => null
+export const AppContext = createContext({state: DefaultContext, dispatch:dispatch});
+
+export const AppProvider: React.FC<any> = ({children})=>{
+    const [state, dispatch] = useReducer(defaultReducer, DefaultContext);
+    return (
+        <AppContext.Provider value={{state, dispatch}}>
+            {children}
+        </AppContext.Provider>
+    )
+}
+
+

@@ -1,0 +1,34 @@
+{
+    "meeting" : {
+        "createTitle" : "יצירת פגישה חדשה",
+        "add-participants-tite" : "הוספת משתמשים ",
+        "labels":{
+            "topic" : "נושא הפגישה",
+            "purpose" : "מטרת הפגישה",
+            "leader" : "שם מלא של מוביל הפגישה",
+            "transcriptor" : "כתובת אימייל של עורך התמלול",
+            "participants" : "משתתפי הפגישה",
+            "new-participant" : {
+                "name" : "שם מלא",
+                "email" : "כתובת אימייל",
+                "position" : "תפקיד"
+            }
+        },
+        "create-meeting":"יצירת פגישה"
+    },
+    "recorder": {
+        "title": "פרטי הפגישה",
+        "labels":{
+            "topic" : "נושא הפגישה",
+            "purpose" : "מטרת הפגישה",
+            "leader" : "מוביל הפגישה",
+            "transcriptor" : "כתובת אימייל של עורך התמלול",
+            "participants" : "משתתפי הפגישה"
+        },
+        "start-record-button": "התחל הקלטת פגישה",
+        "stop-record-button": "סיום הקלטת פגישה",
+        "recording-summary": "סיכום הפגישה",
+        "recording-task": "מטלה"
+        
+    }
+}

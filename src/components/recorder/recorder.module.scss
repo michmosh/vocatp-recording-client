@@ -1,0 +1,15 @@
+.title{
+    border-bottom: 1px solid grey;
+}
+.meetingData{
+    display: flex;
+    gap:1rem;
+    .meetingDataItem{
+        padding:0.5rem;
+        min-width:10rem;
+    }
+    .meetingDataItemParticipants{
+        display: flex;
+        gap:1rem;
+    }
+}

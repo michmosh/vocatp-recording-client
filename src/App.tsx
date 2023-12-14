@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{createContext, useContext} from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import classes from './App.module.css';
+import './i18n';
+import { ThemeProvider } from '@mui/material';
+import Meeting from './components/meeting/meeting.component';
+import Recorder from './components/recorder/recorder.component';
+import { AppContext, DefaultContext,AppProvider } from './context/default.context';
+import { Theme } from './theme/theme';
+import Header from './components/header/header.component';
 
 function App() {
+  const {state , dispatch} = useContext(AppContext)
+  console.log("APP COMP INITIAL STATE -> ", state)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProvider>
+      <ThemeProvider theme={Theme}>
+        <BrowserRouter>
+         <Header />
+          <Routes>
+            <Route path="/" element={<Navigate to="meeting" replace/>} />
+            <Route path="recorder" element={<Recorder/>} />
+            <Route path="meeting" element={<Meeting/>} />
+          </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  </AppProvider>
   );
 }
 
