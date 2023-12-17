@@ -7,10 +7,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import logo from '../../assets/img/audiocodes-logo-colored.svg'
 import transcriptionImage from '../../assets/img/transcription-image.svg'
 import classes from './end-record-dialog.module.scss'
-import { useContext } from "react";
-import { AppContext } from "../../context/default.context";
 import moment from "moment";
-import Moment from "react-moment";
 interface Props{
     onClose : ()=> void,
     duration : any,
@@ -18,7 +15,6 @@ interface Props{
 }
 const EndRecordDialog = (props:Props)=>{
     const { t } = useTranslation(['translation']);
-    const { state, dispatch } = useContext(AppContext);
     const handleClose = ()=>{
         props.onClose()
     }
@@ -57,8 +53,8 @@ const EndRecordDialog = (props:Props)=>{
                
             </Box>
            
-            <DialogActions sx={{marginTop:"3rem", marginBottom:"1rem"}}>
-                <Button onClick={handleClose} variant="contained" >{t("recorder.recording-dialog.close-button")}</Button>
+            <DialogActions sx={{marginTop:"3rem", marginBottom:"1rem", justifyContent:"flex-start"}}>
+                <Button sx={{padding:"0.4rem 3.5rem"}} size="medium" onClick={handleClose} variant="contained" >{t("recorder.recording-dialog.close-button")}</Button>
             </DialogActions>
             <Divider></Divider>
             <div className={classes.dialogFooter}>

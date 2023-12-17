@@ -1,5 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, IconButton, TextField, Typography } from "@mui/material"
-import { height } from "@mui/system";
+import { Box, Button, Card, CardActions, CardContent, TextField, Typography } from "@mui/material"
 import { useContext, useState } from "react"
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context"
@@ -77,7 +76,6 @@ const Meeting = ()=>{
                                 <Button className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants} variant="contained">
                                     <AddIcon/>
                                 </Button>
-                               
                             </div>
                             <div className={classes.participantsList}>
                                 {
@@ -99,14 +97,10 @@ const Meeting = ()=>{
                                             </div>
                                         )
                                    })
- 
                                 }
-                               
                             </div>
                         </div>
-                       
                     </Box>
-                   
                 </CardContent>
                 <CardActions sx={{justifyContent:"end"}}>
                     <Button onClick={createMeeting} variant="contained" >{t("meeting.create-meeting")}</Button>
