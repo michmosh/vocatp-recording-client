@@ -12,13 +12,15 @@ import Moment from 'react-moment';
 import Dialog from "@mui/material/Dialog";
 import EndRecordDialog from "../end-record-dialog/end-record-dialog.component";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 const Recorder = ()=>{
     const { t } = useTranslation(['translation']);
     const { state, dispatch } = useContext(AppContext);
     const navigate = useNavigate();
     const [recordingStart , setRecordingStart] = useState(false)
-    const [recordingStartTime , setRecordingStartTime] = useState(new Date())
+    const [recordingStartTime , setRecordingStartTime] = useState(new Date().toISOString())
     const [showRecordingEndDialog , setShowRecordingEndDialog] = useState(false)
+    const [meetingDuration , setMeetingDuration] = useState(0);
     // console.log("RECORDER COMP -> ", state)
 
     const startRecording = ()=>{
@@ -80,28 +82,35 @@ const Recorder = ()=>{
     }
     const handleCloseDialog = ()=>{
        setShowRecordingEndDialog(false)
+       dispatch({type:"END_MEETING"})
        navigate('/meeting')
+    }
+    const calculateMeetingDuration = ()=>{
+        const now = moment(new Date())
+        const seconds = moment.duration(now.diff(recordingStartTime)).asSeconds()
+       setMeetingDuration(seconds)
     }
     useEffect(()=>{
         window.addEventListener("onRecordingStart" , (data)=>{
             console.log("IN EVENT GUI START " , data)
             setRecordingStart(true)
-            setRecordingStartTime(new Date())
+            setRecordingStartTime(new Date().toISOString())
         })
         window.addEventListener("onRecordingEnd" , (data)=>{
             console.log("IN EVENT GUI END " , data)
+            calculateMeetingDuration()
             setRecordingStart(false)
-            setRecordingStartTime(new Date())
+            setRecordingStartTime(new Date().toISOString())
             setShowRecordingEndDialog(true)
         })
         return()=>{
             window.removeEventListener("onRecordingStart", ()=>{
                 setRecordingStart(false)
-                setRecordingStartTime(new Date())
+                setRecordingStartTime(new Date().toISOString())
             })
             window.removeEventListener("onRecordingEnd", ()=>{
                 setRecordingStart(false)
-                setRecordingStartTime(new Date())
+                setRecordingStartTime(new Date().toISOString())
             })
             
         } 
@@ -186,13 +195,14 @@ const Recorder = ()=>{
                     {
                         renderClipsButton()
                     }
+                    {/* <Button onClick={()=>setShowRecordingEndDialog(true)}> open</Button> */}
                 </Box>
             </CardContent>
             </Card>
            
         </div>
             <Dialog fullWidth maxWidth="sm" open={showRecordingEndDialog}  onClose={handleCloseDialog}>
-                <EndRecordDialog duration={"00:25:35"} onClose={handleCloseDialog}/>
+                <EndRecordDialog startTime={recordingStartTime} duration={meetingDuration} onClose={handleCloseDialog}/>
             </Dialog>
     </Box>
     )

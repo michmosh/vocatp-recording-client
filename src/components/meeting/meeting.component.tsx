@@ -61,7 +61,7 @@ const Meeting = ()=>{
                             <Typography sx={{ fontSize: '2rem',fontWeight:600 ,color:Theme.palette.text.primary}} color="text.primary" gutterBottom>
                                 {t('meeting.createTitle')}
                             </Typography>
-                            <TextField sx={{paddingTop:"1rem"}} value={topic} onChange={(e)=>setMeetingTopic(e.target.value)} className={classes.inputText} fullWidth id="meeting-topic" label={t("meeting.labels.topic")} variant="filled" />
+                            <TextField sx={{paddingTop:"1rem"}} required value={topic} onChange={(e)=>setMeetingTopic(e.target.value)} className={classes.inputText} fullWidth id="meeting-topic" label={t("meeting.labels.topic")} variant="filled" />
                             <TextField sx={{paddingTop:"1rem"}} value={purpose} onChange={(e)=>setMeetingPorpuse(e.target.value)} className={classes.inputText} fullWidth id="meeting-purpose" label={t("meeting.labels.purpose")} variant="filled" />
                             <TextField sx={{paddingTop:"1rem"}} value={leader} onChange={(e)=>setMeetingLeader(e.target.value)} className={classes.inputText} fullWidth id="meeting-leader" label={t("meeting.labels.leader")} variant="filled" />
                             <TextField sx={{paddingTop:"1rem"}} value={transcriptor} onChange={(e)=>setMeetingTranscriptor(e.target.value)} className={classes.inputText} fullWidth id="meeting-transcriptor" label={t("meeting.labels.transcriptor")} variant="filled" />

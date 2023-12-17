@@ -1,3 +1,5 @@
+import { DefaultContext } from "./default.context"
+
 export const defaultReducer = (state: any , action: any)=>{
     const { type, payload } = action
 
@@ -99,6 +101,12 @@ export const defaultReducer = (state: any , action: any)=>{
             return {
                 meeting : {...state.meeting},
                 recorder:{...state.recorder, status:{...payload.status}}
+            }
+        }
+        case "END_MEETING":{
+            console.log("STOP_RECORDING: ", payload)
+            return {
+                ...DefaultContext
             }
         }
 
