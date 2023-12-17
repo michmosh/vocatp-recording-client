@@ -28,7 +28,15 @@
         "start-record-button": "התחל הקלטת פגישה",
         "stop-record-button": "סיום הקלטת פגישה",
         "recording-summary": "סיכום הפגישה",
-        "recording-task": "מטלה"
+        "recording-introduction": "מילות פתיחה",
+        "recording-task": "הוספת מטלה",
+        "recording-dialog":{
+            "title": "הפגישה הסתיימה", 
+            "duration-label":"משך זמן הפגישה",
+            "success-message":"העלאה בוצעה בהצלחה",
+            "close-button":"סיום"
+            
+        }
         
     }
 }

@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { defaultReducer } from './reducer';
+
 export const DefaultContext: any = {
     meeting:{
         id:"",
@@ -15,7 +16,8 @@ export const DefaultContext: any = {
     recorder:{
         test:"",
         status:{
-            recording:false
+            recording:false,
+            type:"introduction"
         }
     }
 }

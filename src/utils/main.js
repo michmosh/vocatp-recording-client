@@ -112,7 +112,8 @@ export async function guiStart(data) {
 
     // Wait when user enable microphone and start recording.
     await streamer.start((pcmChunk) => {
-        console.log("STREAMER START -> " , pcmChunk.length)
+        
+        console.log("STREAMER START -> " , pcmChunk.byteLength)
         sttServer.send(pcmChunk);
     });
 
@@ -133,7 +134,7 @@ export function guiToggleMute() {
 }
 
 // Called when pressed stop button
-export async function guiStop() {
+export async function guiStop(name) {
 
     console.log(`guiStop()`);
 
@@ -142,10 +143,13 @@ export async function guiStop() {
     // muteButton.textContent = 'mute';
     // audioClipButton.textContent = 'start summary';
 
-    saveClip();
+    saveClip(name);
 
     // Streamer will send to STT empty data to stop.
     streamer.stop();
+    console.log("FINAL METADATA -> " , metaData.metadata)
+    const event = new CustomEvent('onRecordingEnd', {detail: "START RECORDING"});
+    window.dispatchEvent(event)
 }
 
 // STT receive empty data to stop and called the event.
@@ -193,21 +197,22 @@ export function guiSaveClip() {
 }
 
 // Add clip to metaData.metadata.clips array
-export function saveClip() {
+export function saveClip(name) {
     let index = metaData.metadata.clips.length;
     let end = streamer.getDuration();
     let begin = (index === 0) ? 0 : metaData.metadata.clips[index - 1].end;
-    let name;
-    switch (index) {
-        case 0:
-            name = 'introduction';
-            break;
-        case 1:
-            name = 'summary';
-            break;
-        default:
-            name = `task ${index - 1}`;
-            break;
-    }
+    // let name;
+    // switch (index) {
+    //     case 0:
+    //         name = 'introduction';
+    //         break;
+    //     case 1:
+    //         name = 'summary';
+    //         break;
+    //     default:
+    //         name = `task ${index - 1}`;
+    //         break;
+    // }
     metaData.metadata.clips.push({ begin, end, name });
+    return metaData.metadata.clips
 }

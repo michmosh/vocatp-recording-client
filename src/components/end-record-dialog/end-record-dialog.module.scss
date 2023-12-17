@@ -1,0 +1,19 @@
+.dialogFooter{
+    padding:1rem;
+    display: flex;
+    justify-content: end;
+
+    .logoImg{
+        width:10rem
+    }
+   
+}
+
+.transcriptionImageWrapper{
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    .transcriptionImage{
+        width:10rem;
+    }
+}

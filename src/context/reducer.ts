@@ -70,14 +70,35 @@ export const defaultReducer = (state: any , action: any)=>{
             console.log("START_RECORDING: ", payload)
             return {
                 meeting : {...state.meeting },
-                recorder:{...state.recorder, status:{recording : payload}}
+                recorder:{...state.recorder, status:{recording : payload.status, type:payload.type}}
+            }
+        }
+        case "START_INTRODUCTION":{
+            console.log("START_INTRODUCTION: ", payload)
+            return {
+                meeting : {...state.meeting, clips:[...state.meeting.clips] },
+                recorder:{...state.recorder, status:{...payload.status}}
+            }
+        }
+        case "START_SUMMARY":{
+            console.log("START_SUMMARY: ", payload)
+            return {
+                meeting : {...state.meeting, clips:[...payload.clips] },
+                recorder:{...state.recorder,  status:{...payload.status}}
+            }
+        }
+        case "START_TASK":{
+            console.log("START_TASK: ", payload)
+            return {
+                meeting : {...state.meeting, clips:[...payload.clips] },
+                recorder:{...state.recorder,  status:{...payload.status}}
             }
         }
         case "STOP_RECORDING":{
             console.log("STOP_RECORDING: ", payload)
             return {
                 meeting : {...state.meeting},
-                recorder:{...state.recorder, status:{recording : payload}}
+                recorder:{...state.recorder, status:{...payload.status}}
             }
         }
 

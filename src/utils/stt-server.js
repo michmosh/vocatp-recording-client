@@ -72,6 +72,8 @@ export class SpeechToTextServer {
 
             console.log(`STT: send ${JSON.stringify(actionStart, null, 2)}`);
             this.websocket.send(JSON.stringify(actionStart));
+            const event = new CustomEvent('onRecordingStart', {detail: "START RECORDING"});
+            window.dispatchEvent(event)
         });
     }
 
