@@ -35,7 +35,17 @@
             "duration-label":"משך זמן הפגישה",
             "success-message":"העלאה בוצעה בהצלחה",
             "close-button":"סיום"
-            
+        },
+        "recording-progress":{
+            "title":"שלבי הפגישה",
+            "current-stage" : "השלב הנוכחי",
+            "status" : "הוקלט בהצלחה",
+            "current-stage-introduction" : "הקדמה",
+            "current-stage-summary" : "סיכום",
+            "current-stage-task" : "מטלה",
+            "recorded-success-introduction" : "הקדמה",
+            "recorded-success-summary" : "סיכום",
+            "recorded-success-task" : "מטלה"
         }
         
     }

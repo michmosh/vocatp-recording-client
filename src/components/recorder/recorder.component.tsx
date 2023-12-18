@@ -13,6 +13,7 @@ import Dialog from "@mui/material/Dialog";
 import EndRecordDialog from "../end-record-dialog/end-record-dialog.component";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import RecordingProgress from "../recording-progress/recording-progress.component";
 const Recorder = ()=>{
     const { t } = useTranslation(['translation']);
     const { state, dispatch } = useContext(AppContext);
@@ -197,6 +198,7 @@ const Recorder = ()=>{
                     }
                     {/* <Button onClick={()=>setShowRecordingEndDialog(true)}> open</Button> */}
                 </Box>
+                <RecordingProgress />
             </CardContent>
             </Card>
            

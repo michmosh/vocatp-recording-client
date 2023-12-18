@@ -9,7 +9,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import MailIcon from '@mui/icons-material/Mail';
 import WorkIcon from '@mui/icons-material/Work';
 import { useNavigate } from "react-router-dom";
-
+import {Validator,initialValidationObject} from './validator'
 const Meeting = ()=>{
     const { state, dispatch } = useContext(AppContext);
     const { t } = useTranslation(['translation']);
@@ -19,6 +19,7 @@ const Meeting = ()=>{
     const [leader , setLeader] = useState("")
     const [transcriptor , setTranscriptor] = useState("")
     const [newParticipant , setNewParticipant] = useState({name: "", position: "",email: ""})
+    const [validator , setValidator] = useState(initialValidationObject)
     // console.log("MEETING COMP ->",state)
 
     const setMeetingTopic = (value: string)=>{
@@ -50,6 +51,19 @@ const Meeting = ()=>{
         console.log(state.meeting)
         navigate('/recorder')
     }
+    const onBlurHandler = (value: string,name: string)=>{
+        const validateObj = {...validator}
+        if(name == 'topic'){
+            const valid = Validator.topic.validate(value)
+            validateObj.topic = {...validateObj.topic,error:valid?.error, helperText:valid?.helperText}
+            setValidator(validateObj)
+        }
+        if(name == 'transcriptor'){
+            const valid = Validator.transcriptor.validate(value)
+            validateObj.transcriptor = {...validateObj.transcriptor,error:valid?.error, helperText:valid?.helperText}
+            setValidator(validateObj)
+        }
+    }
     return (
         <Box sx={{direction:Theme.direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
             <div className="meeting">
@@ -60,19 +74,41 @@ const Meeting = ()=>{
                             <Typography sx={{ fontSize: '2rem',fontWeight:600 ,color:Theme.palette.text.primary}} color="text.primary" gutterBottom>
                                 {t('meeting.createTitle')}
                             </Typography>
-                            <TextField sx={{paddingTop:"1rem"}} required value={topic} onChange={(e)=>setMeetingTopic(e.target.value)} className={classes.inputText} fullWidth id="meeting-topic" label={t("meeting.labels.topic")} variant="filled" />
-                            <TextField sx={{paddingTop:"1rem"}} value={purpose} onChange={(e)=>setMeetingPorpuse(e.target.value)} className={classes.inputText} fullWidth id="meeting-purpose" label={t("meeting.labels.purpose")} variant="filled" />
-                            <TextField sx={{paddingTop:"1rem"}} value={leader} onChange={(e)=>setMeetingLeader(e.target.value)} className={classes.inputText} fullWidth id="meeting-leader" label={t("meeting.labels.leader")} variant="filled" />
-                            <TextField sx={{paddingTop:"1rem"}} value={transcriptor} onChange={(e)=>setMeetingTranscriptor(e.target.value)} className={classes.inputText} fullWidth id="meeting-transcriptor" label={t("meeting.labels.transcriptor")} variant="filled" />
+                            <TextField sx={{paddingTop:"1rem"}} 
+                                helperText={validator.topic.helperText} 
+                                error={validator.topic.error} 
+                                onBlur={(e)=>onBlurHandler(e.target.value , 'topic')} 
+                                required 
+                                value={topic} 
+                                onChange={(e)=>setMeetingTopic(e.target.value)} 
+                                className={classes.inputText} 
+                                fullWidth 
+                                id="meeting-topic" 
+                                label={t("meeting.labels.topic")} 
+                                variant="filled" />
+                            <TextField sx={{paddingTop:"1rem"}} required value={purpose} onChange={(e)=>setMeetingPorpuse(e.target.value)} className={classes.inputText} fullWidth id="meeting-purpose" label={t("meeting.labels.purpose")} variant="filled" />
+                            <TextField sx={{paddingTop:"1rem"}} required value={leader} onChange={(e)=>setMeetingLeader(e.target.value)} className={classes.inputText} fullWidth id="meeting-leader" label={t("meeting.labels.leader")} variant="filled" />
+                            <TextField sx={{paddingTop:"1rem"}} 
+                                helperText={validator.transcriptor.helperText} 
+                                error={validator.transcriptor.error} 
+                                onBlur={(e)=>onBlurHandler(e.target.value , 'transcriptor')} 
+                                required 
+                                value={transcriptor} 
+                                onChange={(e)=>setMeetingTranscriptor(e.target.value)} 
+                                className={classes.inputText} 
+                                fullWidth 
+                                id="meeting-transcriptor" 
+                                label={t("meeting.labels.transcriptor")} 
+                                variant="filled" />
                         </div>
                         <div className={classes.leftFormPanelWrapper}>
                             <Typography className={classes.title}  sx={{ fontSize: '1rem',fontWeight:600 ,color:'rgba(142, 142, 169, 1)'}} color="text.primary" gutterBottom>
                                 {t('meeting.add-participants-tite')}
                             </Typography>
                             <div className={classes.newParticipantInput}>
-                                <TextField sx={{paddingTop:"1rem"}} value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="outlined" />
-                                <TextField sx={{paddingTop:"1rem"}} value={newParticipant.email} onChange={(e)=>addNewParticipant('email',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.email")} variant="outlined" />
-                                <TextField sx={{paddingTop:"1rem"}} value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="outlined" />
+                                <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="outlined" />
+                                <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.email} onChange={(e)=>addNewParticipant('email',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.email")} variant="outlined" />
+                                <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="outlined" />
                                 <Button className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants} variant="contained">
                                     <AddIcon/>
                                 </Button>

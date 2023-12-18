@@ -148,7 +148,7 @@ export async function guiStop(name) {
     // Streamer will send to STT empty data to stop.
     streamer.stop();
     console.log("FINAL METADATA -> " , metaData.metadata)
-    const event = new CustomEvent('onRecordingEnd', {detail: "START RECORDING"});
+    const event = new CustomEvent('onRecordingEnd', {detail: "SUCCESS"});
     window.dispatchEvent(event)
 }
 
@@ -214,5 +214,6 @@ export function saveClip(name) {
     //         break;
     // }
     metaData.metadata.clips.push({ begin, end, name });
+    console.log("METADATA -> ",metaData.metadata)
     return metaData.metadata.clips
 }
