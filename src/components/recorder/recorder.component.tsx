@@ -5,9 +5,6 @@ import { AppContext } from "../../context/default.context";
 import { Theme } from "../../theme/theme";
 import classes from './recorder.module.scss'
 import MicIcon from '@mui/icons-material/Mic';
-import PersonIcon from '@mui/icons-material/Person';
-import MailIcon from '@mui/icons-material/Mail';
-import WorkIcon from '@mui/icons-material/Work';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import AddIcon from '@mui/icons-material/Add';
 import {guiStart, guiStop, saveClip} from '../../utils/main'
