@@ -1,11 +1,9 @@
-import { Box, Card, CardContent, Typography, Chip, Button, Radio, Divider, IconButton, Tooltip } from "@mui/material";
+import { Box, Card, CardContent, Typography, Chip, Button, Radio, Divider } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context";
 import { Theme } from "../../theme/theme";
 import classes from './recorder.module.scss'
-import MicIcon from '@mui/icons-material/Mic';
-import MicOffIcon from '@mui/icons-material/MicOff';
 import AddIcon from '@mui/icons-material/Add';
 import {guiStart, guiStop, saveClip} from '../../utils/main'
 import Moment from 'react-moment';
@@ -16,6 +14,7 @@ import moment from "moment";
 import RecordingProgress from "../recording-progress/recording-progress.component";
 import CustomTooltip from "../custom-tooltip/custom-tooltip.component";
 import React from "react";
+import MuteButton from "../mute-button/mute-button.component";
 const Recorder = ()=>{
     const { t } = useTranslation(['translation']);
     const { state, dispatch } = useContext(AppContext);
@@ -93,6 +92,7 @@ const Recorder = ()=>{
         const seconds = moment.duration(now.diff(recordingStartTime)).asSeconds()
        setMeetingDuration(seconds)
     }
+    
     useEffect(()=>{
         window.addEventListener("onRecordingStart" , (data)=>{
             console.log("IN EVENT GUI START " , data)
@@ -194,9 +194,7 @@ const Recorder = ()=>{
                         <Chip sx={{padding:"1rem", background:"transparent" , border:"1px solid grey"}} label={"00:00:00"}/>
                     }
                     <Divider orientation="vertical" flexItem />
-                    <Button sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
-                       <MicIcon /> 
-                    </Button>
+                    <MuteButton/>
                     {
                         renderClipsButton()
                     }

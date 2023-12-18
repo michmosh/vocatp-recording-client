@@ -1,0 +1,20 @@
+.snackBarSuccess{
+    border:1px solid rgba(32, 202, 123, 1);
+    color:rgba(32, 202, 123, 1);
+    .snackBarText{
+        color:rgba(32, 202, 123, 1);
+    }
+    svg{
+        color:rgba(32, 202, 123, 1);
+    }
+}
+.snackBarError{
+    border:1px solid rgba(240, 86, 86, 1);
+    color:rgba(240, 86, 86, 1);
+    .snackBarText{
+        color:rgba(240, 86, 86, 1);
+    }
+    svg{
+        color:rgba(240, 86, 86, 1);
+    }
+}

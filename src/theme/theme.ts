@@ -61,6 +61,13 @@ export const themeOptions: ThemeOptions = {
             }
           }
         }
+      },
+      MuiSnackbarContent:{
+        styleOverrides:{
+          root:{
+            backgroundColor:'rgba(171, 221, 211, 0.12)'
+          }
+        }
       }
     }
   };

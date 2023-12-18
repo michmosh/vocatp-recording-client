@@ -1,5 +1,5 @@
 import React,{createContext, useContext} from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { HashRouter, BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import classes from './App.module.css';
 import './i18n';
 import { ThemeProvider } from '@mui/material';
@@ -15,14 +15,14 @@ function App() {
   return (
     <AppProvider>
       <ThemeProvider theme={Theme}>
-        <BrowserRouter>
+        <HashRouter>
          <Header />
           <Routes>
             <Route path="/" element={<Navigate to="meeting" replace/>} />
             <Route path="recorder" element={<Recorder/>} />
             <Route path="meeting" element={<Meeting/>} />
           </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   </AppProvider>
   );

@@ -46,6 +46,12 @@
             "recorded-success-introduction" : "הקדמה",
             "recorded-success-summary" : "סיכום",
             "recorded-success-task" : "מטלה"
+        },
+        "recording-status":{
+            "stt-connected": "התחבר בהצלחה לשרת STT",
+            "stt-error": "החיבור לשרת STT נכשל - נסה שנית",
+            "microphone-connected": "מיקרופון התחבר בהצלחה",
+            "microphone-error": "מיקרופון לא זוהה - נסה שנית"
         }
         
     }

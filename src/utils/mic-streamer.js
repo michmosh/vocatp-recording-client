@@ -61,6 +61,9 @@ export class MicrophoneStreamer {
                 onDataChunk(new ArrayBuffer(0));
             }
         }
+        this.processor.port.onmessageerror = (err)=>{
+            console.log(`PROCCESSOR ERROR: -> ${err}`);
+        }
 
         source.connect(this.processor).connect(this.context.destination);
     }

@@ -23,7 +23,7 @@ export class SpeechToTextServer {
             this.websocket = new WebSocket(url);
             this.websocket.onopen = () => {
                 console.log(`STT: connected`);
-                resolve();
+                resolve({status: "connected"});
             }
             this.websocket.onerror = (e) => {
                 console.log(`STT: websocket error`, e);

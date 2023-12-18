@@ -101,21 +101,33 @@ export async function guiStart(data) {
     setStatus('red', `Connecting to STT server: ${sttServerAddress}`);
 
     try {
-        await sttServer.connect(sttServerAddress)
+        const connected = await sttServer.connect(sttServerAddress)
+        console.log("STT SERVER CONNECT ->" , connected)
+        const event = new CustomEvent('onSTTServerConnect', {detail:connected});
+        window.dispatchEvent(event)
+
     } catch (e) {
         setStatus('red', `Cannot connect to STT server: ${sttServerAddress}`, e);
+        const event = new CustomEvent('onSTTServerError', {detail:e});
+        window.dispatchEvent(event)
         return;
     }
 
     // Send to STT server { action: "start" }
     await sttServer.start(onSttTerminated);
-
+    try {
+        await streamer.start((pcmChunk) => {
+            console.log("STREAMER START -> " , pcmChunk.byteLength)
+            sttServer.send(pcmChunk);
+        });
+        const event = new CustomEvent('onMicrophonConnect', {detail:{}});
+        window.dispatchEvent(event)
+    } catch (error) {
+        const event = new CustomEvent('onMicrophonError', {detail:error});
+        window.dispatchEvent(event)
+    }
     // Wait when user enable microphone and start recording.
-    await streamer.start((pcmChunk) => {
-        
-        console.log("STREAMER START -> " , pcmChunk.byteLength)
-        sttServer.send(pcmChunk);
-    });
+   
 
     setStatus('LightGreen', 'recording introduction');
 }
@@ -129,8 +141,9 @@ export function setStatus(color, text) {
 export function guiToggleMute() {
     mute = !mute;
     console.log(`guiToggleMute() mute=${mute}`);
-    muteButton.textContent = mute ? 'un-mute' : 'mute';
+    // muteButton.textContent = mute ? 'un-mute' : 'mute';
     streamer.mute(mute);
+    return mute
 }
 
 // Called when pressed stop button

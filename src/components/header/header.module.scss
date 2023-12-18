@@ -2,6 +2,8 @@
     border-bottom: 1px solid grey;
     background-image: none !important;
     box-shadow: none !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     .logoImg{
         width:10rem
     }

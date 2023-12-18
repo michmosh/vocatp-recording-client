@@ -21,7 +21,7 @@ i18n
     fallbackLng: 'en',
     debug: true,
     backend:{
-        loadPath: '/locales/{{lng}}/{{ns}}.json'
+      loadPath: `${process.env.NODE_ENV === 'development' ? '' : '.'}/locales/{{lng}}/{{ns}}.json`
     },
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default

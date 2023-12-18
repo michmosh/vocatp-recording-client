@@ -18,7 +18,8 @@ export const DefaultContext: any = {
         status:{
             recording:false,
             type:"introduction"
-        }
+        },
+        microphoneStatus:""
     }
 }
 const dispatch: React.Dispatch<any> = () => null

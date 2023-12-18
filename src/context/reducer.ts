@@ -79,7 +79,11 @@ export const defaultReducer = (state: any , action: any)=>{
             console.log("START_INTRODUCTION: ", payload)
             return {
                 meeting : {...state.meeting, clips:[...state.meeting.clips] },
-                recorder:{...state.recorder, status:{...payload.status}}
+                recorder:{
+                    ...state.recorder, 
+                    status:{...payload.status},
+                    microphoneStatus:"unmuted"
+                }
             }
         }
         case "START_SUMMARY":{
@@ -107,6 +111,20 @@ export const defaultReducer = (state: any , action: any)=>{
             console.log("STOP_RECORDING: ", payload)
             return {
                 ...DefaultContext
+            }
+        }
+        case "RECORDER_MUTED":{
+            console.log("RECORDER_MUTED: ", payload)
+            return {
+                meeting : {...state.meeting},
+                recorder:{...state.recorder, microphoneStatus:"muted"}
+            }
+        }
+        case "RECORDER_UNMUTED":{
+            console.log("RECORDER_MUTED: ", payload)
+            return {
+                meeting : {...state.meeting},
+                recorder:{...state.recorder, microphoneStatus:"unmuted"}
             }
         }
 
