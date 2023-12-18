@@ -1,10 +1,13 @@
-import { Box, Card, CardContent, Typography, Chip, Button, Radio, Divider, IconButton } from "@mui/material";
+import { Box, Card, CardContent, Typography, Chip, Button, Radio, Divider, IconButton, Tooltip } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context";
 import { Theme } from "../../theme/theme";
 import classes from './recorder.module.scss'
 import MicIcon from '@mui/icons-material/Mic';
+import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
+import WorkIcon from '@mui/icons-material/Work';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import AddIcon from '@mui/icons-material/Add';
 import {guiStart, guiStop, saveClip} from '../../utils/main'
@@ -14,6 +17,8 @@ import EndRecordDialog from "../end-record-dialog/end-record-dialog.component";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import RecordingProgress from "../recording-progress/recording-progress.component";
+import CustomTooltip from "../custom-tooltip/custom-tooltip.component";
+import React from "react";
 const Recorder = ()=>{
     const { t } = useTranslation(['translation']);
     const { state, dispatch } = useContext(AppContext);
@@ -146,7 +151,9 @@ const Recorder = ()=>{
                                 {state.meeting.recipients.map((item:any , index:number)=>{
                                     return (
                                         <div className={classes.meetingDataItemParticipants} key={`participant-${index}`}>
-                                            <Chip label={item.name}/>
+                                            <CustomTooltip placement="top" title="test" data={item}>
+                                                <Chip label={item.name}/>
+                                            </CustomTooltip>
                                         </div>
                                         
                                     )

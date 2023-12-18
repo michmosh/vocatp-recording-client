@@ -1,0 +1,16 @@
+.tooltipDirectionRtl{
+    .tooltip{
+        direction: rtl;
+        color:blueviolet;
+        border:1px solid green
+    }
+    
+}
+.arrow{
+    font-size: 20;
+    color: "#4A4A4A";
+    &::before{
+        background-color: "blue";
+      border: "2px solid red";
+    }
+}
