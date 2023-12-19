@@ -41,6 +41,9 @@ export const themeOptions: ThemeOptions = {
         styleOverrides:{
           root:{
             background : "linear-gradient(90deg, rgba(86, 170, 255, 1) 0%, rgba(134, 54, 255, 1) 100%);",
+            "&.Mui-disabled":{
+              background:'rgba(255, 255, 255, 0.12)'
+            },
             color:"rgba(246, 242, 228, 1)" 
           }
         }
@@ -66,6 +69,13 @@ export const themeOptions: ThemeOptions = {
         styleOverrides:{
           root:{
             backgroundColor:'rgba(171, 221, 211, 0.12)'
+          }
+        }
+      },
+      MuiCircularProgress:{
+        styleOverrides:{
+          root:{
+            color:'#1976d2'
           }
         }
       }

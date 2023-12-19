@@ -107,12 +107,6 @@ export const defaultReducer = (state: any , action: any)=>{
                 recorder:{...state.recorder, status:{...payload.status}}
             }
         }
-        case "END_MEETING":{
-            console.log("STOP_RECORDING: ", payload)
-            return {
-                ...DefaultContext
-            }
-        }
         case "RECORDER_MUTED":{
             console.log("RECORDER_MUTED: ", payload)
             return {
@@ -125,6 +119,12 @@ export const defaultReducer = (state: any , action: any)=>{
             return {
                 meeting : {...state.meeting},
                 recorder:{...state.recorder, microphoneStatus:"unmuted"}
+            }
+        }
+        case "END_MEETING":{
+            console.log("STOP_RECORDING: ", payload)
+            return {
+                ...DefaultContext
             }
         }
 

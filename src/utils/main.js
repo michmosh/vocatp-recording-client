@@ -181,6 +181,8 @@ export async function onSttTerminated() {
         });
     if (isOK) {
         setStatus('red', `Data successfully sent. You can close the page`);
+        const event = new CustomEvent('onPostResultServerSuccess', {detail:{status:"success"}});
+        window.dispatchEvent(event)
 
     } else {
         setStatus('red', `Cannot send to result server. Save to download files...`);
@@ -191,6 +193,8 @@ export async function onSttTerminated() {
 
         resultServer.saveToFile(strMetadata, "metadata.json");
         resultServer.saveToFile(sttServer.recognizedJSON, "recognized.json");
+        const event = new CustomEvent('onPostResultServerError', {detail:{status:"error"}});
+        window.dispatchEvent(event)
     }
 }
 

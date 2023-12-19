@@ -35,13 +35,13 @@ export class ResultServer {
                 },
                 body: formdata
             });
-
             console.log(`response status=${response.status}`);
             if (response.status !== 200) {
                 console.log(`Bad response. status code=${response.status}`);
                 return false;
             } else {
                 console.log('OK response');
+                
                 return true;
             }
         } catch (e) {
