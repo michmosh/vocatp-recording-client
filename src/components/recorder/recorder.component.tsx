@@ -55,12 +55,13 @@ const Recorder = ()=>{
         dispatch({type:"START_TASK", payload:{status:{recording:true , type:"task"}, clips:clips}})
     }
     const renderClipsButton = ()=>{
+        if(state.recorder.status.recording !== true) return <></>
         // console.log("RECORDING TYPE -> ", state.recorder.status)
         if(state.recorder.status.type == "introduction"){
             return (
                 <Button onClick={saveIntroAndstartRecordingSummary} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
                     <AddIcon sx={{paddingLeft:"0.5rem"}}/>
-                    {t("recorder.recording-introduction")}
+                    {t("recorder.recording-summary")}
                 </Button>
             )
         }
@@ -68,7 +69,7 @@ const Recorder = ()=>{
             return (
                 <Button onClick={saveSummaryAndstartRecordingTask} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
                     <AddIcon sx={{paddingLeft:"0.5rem"}}/>
-                    {t("recorder.recording-summary")}
+                    {t("recorder.recording-task")+ ` 1`}
                 </Button>
             )
         }
@@ -76,7 +77,7 @@ const Recorder = ()=>{
             return (
                 <Button  onClick={saveTaskandstartRecordingTask} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
                     <AddIcon sx={{paddingLeft:"0.5rem"}}/>
-                    {t("recorder.recording-task") + ` ${state.meeting.clips.filter((clip: any)=>clip.name == "task").length +1}`}
+                    {t("recorder.recording-task") + ` ${state.meeting.clips.filter((clip: any)=>clip.name == "task").length +2}`}
                 </Button>
             )
         }

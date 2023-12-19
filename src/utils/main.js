@@ -84,6 +84,8 @@ export async function guiStart(data) {
     // setStatus('red', `Check connection to result server: ${resultServerAddress}`);
     if (!await resultServer.options(resultServerAddress)) {
         // setStatus('red', `Cannot connect to result server: ${resultServerAddress}`);
+        const event = new CustomEvent('onSTTServerError', {detail:"connection-failed"});
+        window.dispatchEvent(event)
         return;
     }
 

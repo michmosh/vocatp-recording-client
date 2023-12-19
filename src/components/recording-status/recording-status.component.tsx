@@ -36,7 +36,7 @@ const RecordingStatus = ()=>{
     }
     useEffect(()=>{
         if(state.recorder.status.recording !== true) setStatus("")
-        
+
         window.addEventListener("onSTTServerConnect" , (data)=>{
             console.log(STATUS_ENUM.STT_SERVER_CONNETCED , data)
             setStatus(STATUS_ENUM.STT_SERVER_CONNETCED)
@@ -44,6 +44,7 @@ const RecordingStatus = ()=>{
         window.addEventListener("onSTTServerError" , (data)=>{
             console.log(STATUS_ENUM.STT_SERVER_ERROR , data)
             setStatus(STATUS_ENUM.STT_SERVER_ERROR)
+            setTimeout(()=>dispatch({type:"RECORDER_ERROR"}), 1500)
         })
         window.addEventListener("onMicrophonConnect" , (data)=>{
             console.log(STATUS_ENUM.MICROPHONE_CONNETCED , data)
@@ -52,6 +53,7 @@ const RecordingStatus = ()=>{
         window.addEventListener("onMicrophonError" , (data)=>{
             console.log(STATUS_ENUM.MICROPHONE_ERROR , data)
             setStatus(STATUS_ENUM.MICROPHONE_ERROR)
+            setTimeout(()=>dispatch({type:"RECORDER_ERROR"}), 1500)
         })
         return ()=>{
             window.removeEventListener("onSTTServerConnect", ()=> setStatus(""))
