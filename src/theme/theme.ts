@@ -78,6 +78,19 @@ export const themeOptions: ThemeOptions = {
             color:'#1976d2'
           }
         }
+      },
+      MuiTooltip:{
+        styleOverrides:{
+          tooltip:{
+            backgroundColor:"rgba(80, 93, 111, 1)",
+            fontSize:"1em"
+          },
+          arrow:{
+            "&::before":{
+              backgroundColor: 'rgba(80, 93, 111, 1)'
+            }
+          }
+        }
       }
     }
   };

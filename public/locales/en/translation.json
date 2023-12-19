@@ -55,6 +55,10 @@
             "stt-error": "החיבור לשרת STT נכשל - נסה שנית",
             "microphone-connected": "מיקרופון התחבר בהצלחה",
             "microphone-error": "מיקרופון לא זוהה - נסה שנית"
+        },
+        "microphone-button":{
+            "mute": "השתק מיקרופון",
+            "unmute": "בטל השתקת מיקרופון"
         }
         
     }
