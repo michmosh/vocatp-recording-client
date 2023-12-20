@@ -1,7 +1,8 @@
 import React, { createContext, useReducer } from 'react';
+import { Meeting } from '../models/base.model';
 import { defaultReducer } from './reducer';
 
-export const DefaultContext: any = {
+export const DefaultContext: Meeting = {
     meeting:{
         id:"",
         topic:"",

@@ -15,6 +15,7 @@ import RecordingProgress from "../recording-progress/recording-progress.componen
 import CustomTooltip from "../custom-tooltip/custom-tooltip.component";
 import React from "react";
 import MuteButton from "../mute-button/mute-button.component";
+import { Clip } from "../../models/base.model";
 const Recorder = ()=>{
     const { t } = useTranslation(['translation']);
     const { state, dispatch } = useContext(AppContext);
@@ -34,23 +35,23 @@ const Recorder = ()=>{
         
     }
     const stopRecording = ()=>{
-        const taskClip = state.meeting.clips.find((clip:any)=>clip.name == "task");
+        const taskClip = state.meeting.clips.find((clip:Clip)=>clip.name == "task");
         if(taskClip) guiStop("task")
         if(!taskClip) guiStop("summary")
         dispatch({type:"STOP_RECORDING", payload:{status:{recording:false , type:"introduction"}}})
     }
     const saveIntroAndstartRecordingSummary = ()=>{
-        const clips = saveClip("introduction")
+        const clips:Clip[] = saveClip("introduction")
         console.log("SAVE INTRO -> "  , clips)
         dispatch({type:"START_SUMMARY", payload:{status:{recording:true , type:"summary"},clips: clips}})
     }
     const saveSummaryAndstartRecordingTask = ()=>{
-        const clips = saveClip("summary")
+        const clips:Clip[] = saveClip("summary")
         console.log("SAVE SUMMARY -> " , clips)
         dispatch({type:"START_TASK", payload:{status:{recording:true , type:"task"}, clips:clips}})
     }
     const saveTaskandstartRecordingTask = ()=>{
-        const clips = saveClip("task")
+        const clips:Clip[] = saveClip("task")
         console.log("SAVE TASK -> "  , clips)
         dispatch({type:"START_TASK", payload:{status:{recording:true , type:"task"}, clips:clips}})
     }

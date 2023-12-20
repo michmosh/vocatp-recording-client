@@ -10,6 +10,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import WorkIcon from '@mui/icons-material/Work';
 import { useNavigate } from "react-router-dom";
 import {Validator,initialValidationObject} from './validator'
+import { Participant } from "../../models/base.model";
+
 const Meeting = ()=>{
     const { state, dispatch } = useContext(AppContext);
     const { t } = useTranslation(['translation']);
@@ -18,7 +20,7 @@ const Meeting = ()=>{
     const [purpose , setPurpose] = useState("")
     const [leader , setLeader] = useState("")
     const [transcriptor , setTranscriptor] = useState("")
-    const [newParticipant , setNewParticipant] = useState({name: "", position: "",email: ""})
+    const [newParticipant , setNewParticipant] = useState<Participant>({name: "", position: "",email: ""})
     const [validator , setValidator] = useState(initialValidationObject)
     // console.log("MEETING COMP ->",state)
 
@@ -45,6 +47,18 @@ const Meeting = ()=>{
     }
     const setMeetingParticipants = ()=>{
         dispatch({type:"ADD_MEETING_RECIPIANTS", payload:newParticipant})
+        setNewParticipant({name: "", position: "",email: ""})
+    }
+
+    const isSubmitButtonDisabled = ()=>{
+        if(topic && purpose && leader) return false
+        return true
+    }
+
+    const isAddParticipantButtonDisabled = ()=>{
+        const {name,email,position} = newParticipant;
+        if(name && email && position) return false
+        return true
     }
 
     const createMeeting = ()=>{
@@ -109,7 +123,7 @@ const Meeting = ()=>{
                                 <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="outlined" />
                                 <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.email} onChange={(e)=>addNewParticipant('email',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.email")} variant="outlined" />
                                 <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="outlined" />
-                                <Button className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants} variant="contained">
+                                <Button disabled={isAddParticipantButtonDisabled()} className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants} variant="contained">
                                     <AddIcon/>
                                 </Button>
                             </div>
@@ -139,7 +153,7 @@ const Meeting = ()=>{
                     </Box>
                 </CardContent>
                 <CardActions sx={{justifyContent:"end"}}>
-                    <Button onClick={createMeeting} variant="contained" >{t("meeting.create-meeting")}</Button>
+                    <Button disabled={isSubmitButtonDisabled()} onClick={createMeeting} variant="contained" >{t("meeting.create-meeting")}</Button>
                 </CardActions>
             </Card>
             </div>
