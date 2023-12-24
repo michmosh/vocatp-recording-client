@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, Divider, TextField, Typography } from "@mui/material"
 import { useContext, useState } from "react"
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context"
@@ -81,9 +81,9 @@ const Meeting = ()=>{
     return (
         <Box sx={{direction:Theme.direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
             <div className="meeting">
-            <Card sx={{width:"70vw", height:"70vh",padding:"1rem", border:"1px solid #86898A", borderRadius:"4px"}}>
+            <Card className={classes.cardWrapper} sx={{width:"90vw", height:"70vh",padding:"1rem", border:"1px solid #86898A", borderRadius:"4px"}}>
                 <CardContent>
-                    <Box sx={{display:"grid",gridTemplateColumns:"1fr 1fr" ,direction:Theme.direction, gap:"3rem"}}>
+                    <Box className={classes.responsiveBox} sx={{display:"grid",gridTemplateColumns:"1fr 2fr" ,direction:Theme.direction, gap:"3rem"}}>
                         <div className={classes.rightFormPanelWrapper}>
                             <Typography sx={{ fontSize: '2rem',fontWeight:600 ,color:Theme.palette.text.primary}} color="text.primary" gutterBottom>
                                 {t('meeting.createTitle')}
@@ -120,9 +120,9 @@ const Meeting = ()=>{
                                 {t('meeting.add-participants-tite')}
                             </Typography>
                             <div className={classes.newParticipantInput}>
-                                <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="outlined" />
-                                <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.email} onChange={(e)=>addNewParticipant('email',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.email")} variant="outlined" />
-                                <TextField sx={{paddingTop:"1rem"}} required value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="outlined" />
+                                <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} required value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="outlined" />
+                                <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} required value={newParticipant.email} onChange={(e)=>addNewParticipant('email',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.email")} variant="outlined" />
+                                <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} required value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="outlined" />
                                 <Button disabled={isAddParticipantButtonDisabled()} className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants} variant="contained">
                                     <AddIcon/>
                                 </Button>
@@ -135,11 +135,15 @@ const Meeting = ()=>{
                                                 <div className={classes.participantsListItemContent}> 
                                                     <PersonIcon /> 
                                                     <div>{item.name}</div> 
+                                                    <Divider sx={{justifySelf:"flex-end"}} orientation="vertical"/>
                                                 </div> 
+                                                
                                                 <div className={classes.participantsListItemContent}> 
                                                     <MailIcon /> 
                                                     <div>{item.email}</div> 
+                                                    <Divider sx={{justifySelf:"flex-end"}} orientation="vertical"/>
                                                 </div> 
+                                                
                                                 <div className={classes.participantsListItemContent}> 
                                                     <WorkIcon /> 
                                                     <div>{item.position}</div> 
