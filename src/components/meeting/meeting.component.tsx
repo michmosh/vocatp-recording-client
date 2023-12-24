@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, Divider, TextField, Typography } from "@mui/material"
+import { Box, Button, Card, CardActions, CardContent, Divider, IconButton, TextField, Typography } from "@mui/material"
 import { useContext, useState } from "react"
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context"
@@ -8,6 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import MailIcon from '@mui/icons-material/Mail';
 import WorkIcon from '@mui/icons-material/Work';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
 import {Validator,initialValidationObject} from './validator'
 import { Participant } from "../../models/base.model";
@@ -64,6 +65,12 @@ const Meeting = ()=>{
     const createMeeting = ()=>{
         console.log(state.meeting)
         navigate('/recorder')
+    }
+
+    const removeRecipient = (recipient:Participant, index:number)=>{
+        const recipients = state.meeting.recipients
+        recipients.splice(index, 1)
+        dispatch({type:"REMOVE_MEETING_RECIPIANTS", payload:recipients})
     }
     const onBlurHandler = (value: string,name: string)=>{
         const validateObj = {...validator}
@@ -148,6 +155,9 @@ const Meeting = ()=>{
                                                     <WorkIcon /> 
                                                     <div>{item.position}</div> 
                                                 </div> 
+                                                <Button onClick={()=>removeRecipient(item,index)} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}> 
+                                                    <DeleteIcon /> 
+                                                </Button> 
                                             </div>
                                         )
                                    })

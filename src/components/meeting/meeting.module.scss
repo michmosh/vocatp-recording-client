@@ -23,11 +23,11 @@
         height:3.5rem;
     }
     .participantsList{
-        padding: 1rem 0.5rem;
+        padding: 1rem 0rem;
         .participantsListItem{
-            display: grid;
+            display: flex;
             grid-template-columns: 1fr 1fr 1fr auto;
-            gap:2rem;
+            gap:1rem;
             padding: 0.5rem 0rem;
             & .participantsListItemContent{
                 display: grid;

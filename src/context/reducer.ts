@@ -67,6 +67,16 @@ export const defaultReducer = (state: any , action: any)=>{
                 recorder:{...state.recorder}
             }
         }
+        case "REMOVE_MEETING_RECIPIANTS":{
+            console.log("ADD_MEETING_RECIPIANTS: ", payload)
+            return {
+                meeting : {
+                   ...state.meeting ,
+                   recipients:[...payload]
+                },
+                recorder:{...state.recorder}
+            }
+        }
         case "START_RECORDING":{
             console.log("START_RECORDING: ", payload)
             return {
