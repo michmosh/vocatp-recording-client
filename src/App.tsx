@@ -5,7 +5,7 @@ import './i18n';
 import { ThemeProvider } from '@mui/material';
 import Meeting from './components/meeting/meeting.component';
 import Recorder from './components/recorder/recorder.component';
-import { AppContext, DefaultContext,AppProvider } from './context/default.context';
+import { AppContext,AppProvider } from './context/default.context';
 import { Theme } from './theme/theme';
 import Header from './components/header/header.component';
 

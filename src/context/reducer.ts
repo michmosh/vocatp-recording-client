@@ -1,5 +1,4 @@
 import { DefaultContext } from "./default.context"
-
 export const defaultReducer = (state: any , action: any)=>{
     const { type, payload } = action
 
@@ -124,13 +123,15 @@ export const defaultReducer = (state: any , action: any)=>{
         case "RECORDER_ERROR":{
             console.log("RECORDER_ERROR: ", payload)
             return {
-                ...DefaultContext
+                meeting : {...state.meeting, clips:[], recipients:[]},
+                recorder:{...state.recorder}
             }
         }
         case "END_MEETING":{
-            console.log("STOP_RECORDING: ", payload)
+            console.log("STOP_RECORDING: ", DefaultContext)
             return {
-                ...DefaultContext
+                meeting : {...state.meeting, clips:[], recipients:[]},
+                recorder:{...state.recorder}
             }
         }
 
