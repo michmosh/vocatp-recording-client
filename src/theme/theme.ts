@@ -25,6 +25,34 @@ export const themeOptions: ThemeOptions = {
       },
     },
     components:{
+      MuiCssBaseline:{
+        styleOverrides: {
+          body: {
+            scrollbarColor: "green yellow",
+            "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
+              backgroundColor: "#2b2b2b",
+            },
+            "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
+              borderRadius: 8,
+              backgroundColor: "#6b6b6b",
+              minHeight: 24,
+              border: "3px solid #2b2b2b",
+            },
+            "&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus": {
+              backgroundColor: "#959595",
+            },
+            "&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active": {
+              backgroundColor: "#959595",
+            },
+            "&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover": {
+              backgroundColor: "#959595",
+            },
+            "&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner": {
+              backgroundColor: "#2b2b2b",
+            }
+          }
+        }
+      },
       MuiTextField:{
         styleOverrides: {
           root: {
@@ -38,6 +66,15 @@ export const themeOptions: ThemeOptions = {
         },
       },
       MuiButton:{
+        variants:[
+          {
+           props:{variant: "text"} ,
+           style:{
+              background:'transparent',
+              color:'rgba(60, 168, 255, 1)'
+           }
+          }
+        ],
         styleOverrides:{
           root:{
             background : "linear-gradient(90deg, rgba(86, 170, 255, 1) 0%, rgba(134, 54, 255, 1) 100%);",

@@ -23,12 +23,17 @@
         height:3.5rem;
     }
     .participantsList{
-        padding: 1rem 0rem;
+        margin-top:1rem;
+        padding: 1rem 0.5rem 1rem 0.5rem;
+        max-height: 15rem;
+        overflow-y: auto;
+        direction: ltr;
         .participantsListItem{
             display: flex;
             grid-template-columns: 1fr 1fr 1fr auto;
             gap:1rem;
             padding: 0.5rem 0rem;
+            direction: rtl;
             & .participantsListItemContent{
                 display: grid;
                 grid-template-columns: 1fr auto 1fr;

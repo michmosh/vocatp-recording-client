@@ -25,6 +25,10 @@
             "transcriptor" : "כתובת אימייל של עורך התמלול",
             "participants" : "משתתפי הפגישה"
         },
+        "participants-show":{
+            "show-more":"פתח רשימה",
+            "show-less":"סגור רשימה"
+        },
         "start-record-button": "התחל הקלטת פגישה",
         "stop-record-button": "סיום הקלטת פגישה",
         "recording-summary": "סיכום הפגישה",

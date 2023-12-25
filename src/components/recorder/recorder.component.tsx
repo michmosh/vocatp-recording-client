@@ -24,6 +24,7 @@ const Recorder = ()=>{
     const [recordingStartTime , setRecordingStartTime] = useState(new Date().toISOString())
     const [showRecordingEndDialog , setShowRecordingEndDialog] = useState(false)
     const [meetingDuration , setMeetingDuration] = useState(0);
+    const [participantsIndex , setParticipantsIndex] = useState(10);
     // console.log("RECORDER COMP -> ", state)
 
     const startRecording = ()=>{
@@ -94,6 +95,11 @@ const Recorder = ()=>{
         const seconds = moment.duration(now.diff(recordingStartTime)).asSeconds()
        setMeetingDuration(seconds)
     }
+
+    const showAllParticipants = ()=>{
+        if(participantsIndex === 10 ) setParticipantsIndex(100)
+        if(participantsIndex > 10 ) setParticipantsIndex(10)
+    }
     
     useEffect(()=>{
         window.addEventListener("onRecordingStart" , (data)=>{
@@ -144,19 +150,33 @@ const Recorder = ()=>{
                             <span style={{color:Theme.palette.secondary.main}}>{t("recorder.labels.leader")} : </span>
                             <span>{state.meeting.leader}</span>
                         </div>
-                        <div className={classes.meetingDataItem}>
+                        <div className={classes.meetingDataItemParticipantsWrapper}>
                             <span style={{color:Theme.palette.secondary.main}}>{t("recorder.labels.participants")} : </span>
                             <div className={classes.meetingDataItemParticipants}>
                                 {state.meeting.recipients.map((item:any , index:number)=>{
-                                    return (
-                                        <div className={classes.meetingDataItemParticipants} key={`participant-${index}`}>
-                                            <CustomTooltip placement="top" title="test" data={item}>
-                                                <Chip label={item.name}/>
-                                            </CustomTooltip>
-                                        </div>
-                                        
-                                    )
+                                    if(index < participantsIndex){
+                                        return (
+                                            <div className={classes.participantChip} key={`participant-${index}`}>
+                                                <CustomTooltip sx={{flexBasis:"10%"}} placement="top" title="test" data={item}>
+                                                    <Chip label={item.name}/>
+                                                </CustomTooltip>
+                                            </div>
+                                            
+                                        )
+                                    }
                                 })}
+                                {
+                                    state.meeting.recipients.length > 10 ?
+                                    <Button onClick={showAllParticipants} variant="text">
+                                        {
+                                            participantsIndex === 10 ? 
+                                            t("recorder.participants-show.show-more") : 
+                                            t("recorder.participants-show.show-less")
+                                        }
+                                    </Button>
+                                    :
+                                    <></>
+                                }
                             </div>
                         </div>
                     </div>
@@ -165,7 +185,7 @@ const Recorder = ()=>{
                 <Box sx={{backgroundColor: Theme.palette.background.paper, padding:'2rem', display:"flex", justifyContent:"space-evenly", alignItems:"center"}}>
                     {
                     state.recorder.status.recording == false ? 
-                    <Button onClick={startRecording} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
+                    <Button variant="outlined" onClick={startRecording} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
                         <Radio
                             checked={true}
                             value="a"
@@ -176,7 +196,7 @@ const Recorder = ()=>{
                         
                     </Button>
                     :
-                    <Button onClick={stopRecording} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
+                    <Button variant="outlined" onClick={stopRecording} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
                         <Radio
                             checked={true}
                             value="a"

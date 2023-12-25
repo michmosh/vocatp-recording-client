@@ -8,10 +8,18 @@
         padding:0.5rem;
         min-width:10rem;
     }
-    .meetingDataItemParticipants{
-        display: flex;
-        gap:1rem;
-    }
+    .meetingDataItemParticipantsWrapper{
+        flex-basis: 80%;
+        .meetingDataItemParticipants{
+            display: flex;
+            gap:1rem;
+            flex-flow: row wrap;
+            .participantChip{
+                flex-basis: 7%;
+            }
+        }
+    }   
+   
 }
 .momentTime{
     padding:0.5rem 1rem;
