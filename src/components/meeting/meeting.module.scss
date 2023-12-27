@@ -44,15 +44,15 @@
     }
     .inputText{
         label{
-            // transform-origin: right !important;
-            // left: inherit !important;
-            // right: 1.75rem !important; 
+            transform-origin: right !important;
+            left: inherit !important;
+            right: 1.75rem !important; 
             line-height: 3;
         }
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
     .responsiveBox{
         grid-template-columns:  repeat(1,1fr) !important;
     }

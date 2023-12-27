@@ -52,7 +52,7 @@ const Meeting = ()=>{
     }
 
     const isSubmitButtonDisabled = ()=>{
-        if(topic && purpose && leader) return false
+        if(topic && purpose && leader && transcriptor) return false
         return true
     }
 
@@ -84,11 +84,16 @@ const Meeting = ()=>{
             validateObj.transcriptor = {...validateObj.transcriptor,error:valid?.error, helperText:valid?.helperText}
             setValidator(validateObj)
         }
+        if(name == 'participant-email'){
+            const valid = Validator.participnatEmail.validate(value)
+            validateObj.participnatEmail = {...validateObj.participnatEmail,error:valid?.error, helperText:valid?.helperText}
+            setValidator(validateObj)
+        }
     }
     return (
         <Box sx={{direction:Theme.direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
             <div className="meeting">
-            <Card className={classes.cardWrapper} sx={{width:"90vw", height:"70vh",padding:"1rem", border:"1px solid #86898A", borderRadius:"4px"}}>
+            <Card className={classes.cardWrapper} sx={{width:"90vw", height:"80vh",overflowY:"auto",padding:"1rem", border:"1px solid #86898A", borderRadius:"4px"}}>
                 <CardContent>
                     <Box className={classes.responsiveBox} sx={{display:"grid",gridTemplateColumns:"1fr 2fr" ,direction:Theme.direction, gap:"3rem"}}>
                         <div className={classes.rightFormPanelWrapper}>
@@ -126,14 +131,36 @@ const Meeting = ()=>{
                             <Typography className={classes.title}  sx={{ fontSize: '1rem',fontWeight:600 ,color:'rgba(142, 142, 169, 1)'}} color="text.primary" gutterBottom>
                                 {t('meeting.add-participants-tite')}
                             </Typography>
-                            <div className={classes.newParticipantInput}>
-                                <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} required value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="outlined" />
-                                <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} required value={newParticipant.email} onChange={(e)=>addNewParticipant('email',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.email")} variant="outlined" />
-                                <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} required value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="outlined" />
-                                <Button disabled={isAddParticipantButtonDisabled()} className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants} variant="contained">
-                                    <AddIcon/>
-                                </Button>
-                            </div>
+                            <Box sx={{display:"flex", width:'100%', gap:"1rem"}} className={classes.newParticipantInputWrapper}>
+                                <Box sx={{display:"block", flexBasis:"90%"}} className={classes.newParticipantInputWrapper}>
+                                    <div className={classes.newParticipantInput}>
+                                        <TextField sx={{paddingTop:"1rem", flexBasis:"50%"}} value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="filled" />
+                                        <TextField sx={{paddingTop:"1rem", flexBasis:"50%"}} value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="filled" />
+                                        
+                                    </div>
+                                    <div className={classes.newParticipantInput}>
+                                        <TextField 
+                                            sx={{paddingTop:"1rem", flexBasis:"100%"}} 
+                                            helperText={validator.participnatEmail.helperText} 
+                                            error={validator.participnatEmail.error}  
+                                            value={newParticipant.email} 
+                                            onBlur={(e)=>onBlurHandler(e.target.value , 'participant-email')}  
+                                            onChange={(e)=>addNewParticipant('email',e.target.value)} 
+                                            className={classes.inputText} 
+                                            id="meeting-topic" 
+                                            label={t("meeting.labels.new-participant.email")} 
+                                            variant="filled" />
+                                    
+                                    </div>
+                                </Box>
+                                <Box sx={{paddingTop:"1rem"}}>
+                                    <Button disabled={isAddParticipantButtonDisabled()} className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants}  variant="contained">
+                                        <AddIcon/>
+                                    </Button>
+                                </Box>
+                              
+                            </Box>
+                           
                             <div className={classes.participantsList}>
                                 {
                                    state.meeting.recipients.map((item:any, index:number)=>{
@@ -155,7 +182,7 @@ const Meeting = ()=>{
                                                     <WorkIcon /> 
                                                     <div>{item.position}</div> 
                                                 </div> 
-                                                <Button onClick={()=>removeRecipient(item,index)} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}> 
+                                                <Button variant="outlined" onClick={()=>removeRecipient(item,index)} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}> 
                                                     <DeleteIcon /> 
                                                 </Button> 
                                             </div>
