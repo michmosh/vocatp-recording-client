@@ -40,11 +40,14 @@ const Meeting = ()=>{
     const setMeetingTranscriptor = (value: string)=>{
         setTranscriptor(value)
         dispatch({type:"CHANGE_MEETING_TRANSCRIPTOR", payload:value})
+        validateFields(value , 'transcriptor')
     }
     const addNewParticipant = (attr:'name'|'email'|'position', value:string)=>{
         const participant = {...newParticipant}
         participant[attr] = value
         setNewParticipant({...participant})
+        if(attr == 'email') validateFields(value , 'participant-email')
+        
     }
     const setMeetingParticipants = ()=>{
         dispatch({type:"ADD_MEETING_RECIPIANTS", payload:newParticipant})
@@ -52,14 +55,23 @@ const Meeting = ()=>{
     }
 
     const isSubmitButtonDisabled = ()=>{
-        if(topic && purpose && leader && transcriptor) return false
-        return true
+        let isDisabled = true
+        if(topic && purpose && leader && transcriptor){
+            if(validator.transcriptor.error == false) isDisabled = false 
+            if(validator.transcriptor.error == true) isDisabled = true 
+        } 
+        return isDisabled
     }
 
     const isAddParticipantButtonDisabled = ()=>{
         const {name,email,position} = newParticipant;
-        if(name && email && position) return false
-        return true
+        let isDisabled = true
+        if(name && email && position){
+            isDisabled = false
+            if(validator.participnatEmail.error == false) isDisabled = false
+            if(validator.participnatEmail.error == true) isDisabled = true
+        } 
+        return isDisabled
     }
 
     const createMeeting = ()=>{
@@ -73,6 +85,10 @@ const Meeting = ()=>{
         dispatch({type:"REMOVE_MEETING_RECIPIANTS", payload:recipients})
     }
     const onBlurHandler = (value: string,name: string)=>{
+        validateFields(value , name)
+    }
+
+    const validateFields = (value: string,name: string)=>{
         const validateObj = {...validator}
         if(name == 'topic'){
             const valid = Validator.topic.validate(value)
@@ -136,7 +152,6 @@ const Meeting = ()=>{
                                     <div className={classes.newParticipantInput}>
                                         <TextField sx={{paddingTop:"1rem", flexBasis:"50%"}} value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="filled" />
                                         <TextField sx={{paddingTop:"1rem", flexBasis:"50%"}} value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="filled" />
-                                        
                                     </div>
                                     <div className={classes.newParticipantInput}>
                                         <TextField 
@@ -150,7 +165,6 @@ const Meeting = ()=>{
                                             id="meeting-topic" 
                                             label={t("meeting.labels.new-participant.email")} 
                                             variant="filled" />
-                                    
                                     </div>
                                 </Box>
                                 <Box sx={{paddingTop:"1rem"}}>
@@ -158,7 +172,6 @@ const Meeting = ()=>{
                                         <AddIcon/>
                                     </Button>
                                 </Box>
-                              
                             </Box>
                            
                             <div className={classes.participantsList}>
