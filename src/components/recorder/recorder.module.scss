@@ -1,6 +1,10 @@
 .title{
     border-bottom: 1px solid grey;
 }
+.recorder{
+    max-height: 85vh !important;
+    overflow-y: auto !important;
+}
 .meetingData{
     display: flex;
     gap:1rem;
@@ -25,4 +29,10 @@
     padding:0.5rem 1rem;
     border:1px solid grey;
     border-radius: 4px;
+}
+
+@media screen and (max-width: 1400px) {
+    .wrapperBox{
+        // height:unset !important
+    }
 }

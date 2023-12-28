@@ -127,7 +127,7 @@ const Recorder = ()=>{
         } 
     })
     return (
-        <Box sx={{direction:Theme.direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <Box className={classes.wrapperBox} sx={{direction:Theme.direction, minHeight:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div className="recorder">
             <Card sx={{backgroundColor:Theme.palette.background.default,width:"70vw", padding:"1rem"}}>
             <CardContent sx={{padding:"4rem"}}>
