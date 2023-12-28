@@ -9,7 +9,7 @@ const RecordingProgress = ()=>{
     const { state, dispatch } = useContext(AppContext);
     if(state.recorder.status.recording == false) return <></>
     return (
-        <Box sx={{padding:"1rem", overflowY: "auto", maxHeight:"15rem"}}>
+        <Box sx={{padding:"1rem"}}>
             <Typography sx={{color:Theme.palette.secondary.main}}>{t("recorder.recording-progress.title")}</Typography>
             <Divider sx={{marginTop:"0.5rem", marginBottom:"0.5rem"}} orientation="horizontal"/>
             {
@@ -24,6 +24,7 @@ const RecordingProgress = ()=>{
                 :
                 <></>
             }
+             <Box sx={{padding:"1rem", overflowY: "auto", maxHeight:"10rem"}}>
             {
                 state.meeting.clips.map((clip:any, index:number)=>{
                     return (
@@ -39,6 +40,7 @@ const RecordingProgress = ()=>{
                     )
                 })
             }
+            </Box>
         </Box>
     )
 }

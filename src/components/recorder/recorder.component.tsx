@@ -129,7 +129,7 @@ const Recorder = ()=>{
     return (
         <Box sx={{direction:Theme.direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div className="recorder">
-            <Card sx={{backgroundColor:Theme.palette.background.default,width:"70vw", height:"70vh",padding:"1rem"}}>
+            <Card sx={{backgroundColor:Theme.palette.background.default,width:"70vw", padding:"1rem"}}>
             <CardContent sx={{padding:"4rem"}}>
                 <Typography className={classes.title}  sx={{ fontSize: '1rem',fontWeight:600 ,color:'rgba(142, 142, 169, 1)'}} color="text.primary" gutterBottom>
                     {t('recorder.title')}
