@@ -47,7 +47,7 @@ export const Validator = {
                 if(value == "") validatorResponse =  {error: true , helperText: Validator.topic.helperText}
             }
             if(Validator.transcriptor.emailField == true){
-                if(/^[a-zA-Z]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/.test(value) == false){
+                if(/^[a-zA-Z0-9]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/.test(value) == false){
                     validatorResponse =  {error: true , helperText: Validator.transcriptor.helperText}
                 }
             }
