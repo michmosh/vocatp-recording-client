@@ -13,6 +13,7 @@ export class pcmProcessor extends AudioWorkletProcessor {
         this.view = new DataView(this.buffer);
         this.stop = false;
         this.mute = false;
+        this.inputData = null;
 
         this.port.onmessage = (msg) => {
             let { stop, mute } = msg.data;
@@ -39,6 +40,15 @@ export class pcmProcessor extends AudioWorkletProcessor {
             return false;
 
         const data = inputs[0][0];
+        let inputData = !!data;
+        if( inputData !== this.inputData){
+          console.log(`processor: ${inputData ? 'started input data' : 'ended input data'}`);
+          this.inputData = inputData;
+        }
+        
+        if( !data ){ 
+            return true;
+        }
 
         this.floatTo16BitPCM(this.view, this.offset, data, this.mute);
         this.offset += this.frameSize;

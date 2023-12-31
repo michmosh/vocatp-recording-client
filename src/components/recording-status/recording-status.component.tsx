@@ -1,4 +1,4 @@
-import { Box, SnackbarContent } from "@mui/material";
+import { Box, Button, SnackbarContent } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -7,6 +7,7 @@ import { Theme } from "../../theme/theme";
 import classes from './recording-status.module.scss'
 import WifiIcon from '@mui/icons-material/Wifi';
 import MicIcon from '@mui/icons-material/Mic';
+import { startMicrophone } from "../../utils/main";
 const STATUS_ENUM = {
     STT_SERVER_CONNETCED: "STT_SERVER_CONNETCED",
     STT_SERVER_ERROR: "STT_SERVER_ERROR",
@@ -17,6 +18,7 @@ const RecordingStatus = ()=>{
     const { state, dispatch } = useContext(AppContext);
     const { t } = useTranslation(['translation']);
     const [status , setStatus] = useState("")
+    const [showDisconnectButton , setShowDisconnectButton] = useState(false)
     
     const getSnackBarClassName = ()=>{
         if(status === STATUS_ENUM.STT_SERVER_CONNETCED || status === STATUS_ENUM.MICROPHONE_CONNETCED) return classes.snackBarSuccess
@@ -34,6 +36,9 @@ const RecordingStatus = ()=>{
         if(status === STATUS_ENUM.MICROPHONE_CONNETCED || status === STATUS_ENUM.MICROPHONE_ERROR) return <MicIcon />
         return <></>
     }
+    const reconnectMic = ()=>{
+        startMicrophone()
+    }
     useEffect(()=>{
         if(state.recorder.status.recording !== true) setStatus("")
 
@@ -49,11 +54,16 @@ const RecordingStatus = ()=>{
         window.addEventListener("onMicrophonConnect" , (data)=>{
             console.log(STATUS_ENUM.MICROPHONE_CONNETCED , data)
             setStatus(STATUS_ENUM.MICROPHONE_CONNETCED)
+            setShowDisconnectButton(false)
         })
         window.addEventListener("onMicrophonError" , (data)=>{
             console.log(STATUS_ENUM.MICROPHONE_ERROR , data)
             setStatus(STATUS_ENUM.MICROPHONE_ERROR)
             setTimeout(()=>dispatch({type:"RECORDER_ERROR"}), 1500)
+        })
+        window.addEventListener("onMicrophneDisconect" , (data)=>{
+           setStatus(STATUS_ENUM.MICROPHONE_ERROR)
+           setShowDisconnectButton(true)
         })
         return ()=>{
             window.removeEventListener("onSTTServerConnect", ()=> setStatus(""))
@@ -70,8 +80,13 @@ const RecordingStatus = ()=>{
             <Box sx={{display:"flex", gap:"1rem", alignItems:"center"}}>
                  <div className={classes.snackBarText}>{renderSnackBarMessage()}</div>
                 {renderSnackBarIcon()}
+                {
+                    showDisconnectButton ? 
+                    <Button onClick={reconnectMic}> reconnect</Button>:
+                    <></>
+                }
             </Box>
-           
+            
         </React.Fragment>
         
         } />

@@ -117,6 +117,34 @@ export async function guiStart(data) {
 
     // Send to STT server { action: "start" }
     await sttServer.start(onSttTerminated);
+
+    streamer.addEventListener('started', () => {
+        let index = metaData.metadata.clips.length;
+        let recName = getClipName(index);
+        setStatus('LightGreen', `recording ${recName}`);
+        console.log('microphone started');
+        const event = new CustomEvent('onMicrophonConnect', {detail:{}});
+        window.dispatchEvent(event)
+    });
+
+    streamer.addEventListener('ended', () => {
+        console.log('Used microphone disconnected.');
+        setStatus('red', 'Microphone stop works. You may reconnect or connect new microphone and/or configure system default microphone.');
+        const event = new CustomEvent('onMicrophneDisconect', {detail:{status:'Microphone Disconnect'}});
+        window.dispatchEvent(event)
+        // Show microphone ready button
+        // let microphoneReadyButton = document.getElementById('microphone_ready_btn');
+        // microphoneReadyButton.style = "display:block";
+        // microphoneReadyButton.onclick = () => {
+        //     console.log('trying restart microphone');
+
+        //     // hide the button
+        //     microphoneReadyButton.style = "display:none";
+
+        //     streamer.startMicrophone();
+        // };
+    });
+
     try {
         await streamer.start((pcmChunk) => {
             console.log("STREAMER START -> " , pcmChunk.byteLength)
@@ -132,6 +160,10 @@ export async function guiStart(data) {
    
 
     setStatus('LightGreen', 'recording introduction');
+}
+
+export function startMicrophone(){
+    streamer.startMicrophone();
 }
 
 export function setStatus(color, text) {
@@ -200,6 +232,13 @@ export async function onSttTerminated() {
     }
 }
 
+function getClipName(index, isLocale = true) {
+    switch (index) {
+        case 0: return isLocale ? 'מבוא' : 'introduction';
+        case 1: return isLocale ? 'סיכום' : 'summary';
+        default: return isLocale ? `מטלה ${index - 1}` : `task ${index - 1}`;
+    }
+}
 // Add clip to metadata and modify GUI:
 // - currently recording audio clip (recName)
 // - and next recording audio clip (nextName)
