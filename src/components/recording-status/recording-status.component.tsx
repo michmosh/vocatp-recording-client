@@ -75,14 +75,14 @@ const RecordingStatus = ()=>{
     if(status == "" || state.recorder.status.recording !== true) return <></>
     return (
         <Box sx={{display:"flex", justifyContent:"center"}}>
-        <SnackbarContent sx={{width:"15rem"}} className={getSnackBarClassName()} message={
+        <SnackbarContent sx={{ justifyContent:"center"}} className={getSnackBarClassName()} message={
         <React.Fragment>
             <Box sx={{display:"flex", gap:"1rem", alignItems:"center"}}>
                  <div className={classes.snackBarText}>{renderSnackBarMessage()}</div>
                 {renderSnackBarIcon()}
                 {
                     showDisconnectButton ? 
-                    <Button onClick={reconnectMic}> reconnect</Button>:
+                    <Button variant="contained" onClick={reconnectMic}> {t('recorder.recording-status.reconnect-button')}</Button>:
                     <></>
                 }
             </Box>
