@@ -20,8 +20,9 @@ export const themeOptions: ThemeOptions = {
       }
     },
     typography: {
+      fontFamily: '"Open Sans" , sans-serif',
       subtitle1: {
-        fontFamily: 'Open Sans',
+        fontFamily: '"Open Sans" , sans-serif',
       },
     },
     components:{
