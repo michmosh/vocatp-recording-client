@@ -1,4 +1,4 @@
-import { resultServerToken} from './config'
+const { resultServerToken} =  window.BASE_CONFIG
 export class ResultServer {
     async options(resultServerAddress) {
         console.log(`Result Server: send OPTIONS to https://${resultServerAddress}/hrec`);

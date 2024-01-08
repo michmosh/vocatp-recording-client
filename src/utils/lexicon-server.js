@@ -1,4 +1,6 @@
-import { lexiconServerAddress, lexiconServerToken} from './config'
+
+const { lexiconServerAddress, lexiconServerToken} = window.BASE_CONFIG
+
 export class LexiconServer {
     async fetch(url, token) {
         let response = await fetch(url, {

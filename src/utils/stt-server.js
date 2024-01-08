@@ -1,4 +1,4 @@
-import {sttServerAddress} from './config'
+const {sttServerAddress} = window.BASE_CONFIG
 export class SpeechToTextServer {
     constructor() {
         this.websocket = null;

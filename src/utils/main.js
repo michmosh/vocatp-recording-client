@@ -1,10 +1,10 @@
 'use strict';
-import { lexiconServerAddress, resultServerAddress,sttServerAddress} from './config'
+
 import {MicrophoneStreamer} from './mic-streamer';
 import {LexiconServer} from './lexicon-server';
 import {SpeechToTextServer} from './stt-server';
 import {ResultServer} from './result-server'
-
+const { lexiconServerAddress, resultServerAddress,sttServerAddress} = window.BASE_CONFIG
 let streamer = new MicrophoneStreamer();
 let lexiconServer = new LexiconServer();
 let sttServer = new SpeechToTextServer();
