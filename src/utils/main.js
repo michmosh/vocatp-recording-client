@@ -271,7 +271,7 @@ export function saveClip(name) {
     //         name = `task ${index - 1}`;
     //         break;
     // }
-    metaData.metadata.clips.push({ begin, end, name });
+    metaData.metadata.clips.push({ begin, end, name, type: name });
     console.log("METADATA -> ",metaData.metadata)
     return metaData.metadata.clips
 }
