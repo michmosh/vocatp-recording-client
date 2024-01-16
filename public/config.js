@@ -5,6 +5,7 @@ var BASE_CONFIG = {
     lexiconServerAddress : 'ats.webrtc.audiocodes.com:8081',
     sttServerToken : '???',
     resultServerToken : '121212',
-    lexiconServerToken : '121212'
+    lexiconServerToken : '121212',
+    defaultLanguage: 'he'
 }
 

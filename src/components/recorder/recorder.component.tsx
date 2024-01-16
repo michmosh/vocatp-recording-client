@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Typography, Chip, Button, Radio, Divider } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context";
 import { Theme } from "../../theme/theme";
@@ -17,7 +17,7 @@ import React from "react";
 import MuteButton from "../mute-button/mute-button.component";
 import { Clip } from "../../models/base.model";
 const Recorder = ()=>{
-    const { t } = useTranslation(['translation']);
+    const { t,i18n } = useTranslation(['translation']);
     const { state, dispatch } = useContext(AppContext);
     const navigate = useNavigate();
     const [recordingStart , setRecordingStart] = useState(false)
@@ -26,6 +26,7 @@ const Recorder = ()=>{
     const [meetingDuration , setMeetingDuration] = useState(0);
     const [participantsIndex , setParticipantsIndex] = useState(10);
     // console.log("RECORDER COMP -> ", state)
+    const direction = i18n.dir(i18n.language)
 
     const startRecording = ()=>{
         const meeting = state.meeting
@@ -127,14 +128,14 @@ const Recorder = ()=>{
         } 
     })
     return (
-        <Box className={classes.wrapperBox} sx={{direction:Theme.direction, minHeight:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <Box className={classes.wrapperBox} sx={{direction:direction, minHeight:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div className="recorder">
             <Card sx={{backgroundColor:Theme.palette.background.default,width:"70vw", padding:"1rem"}}>
             <CardContent sx={{padding:"4rem"}}>
                 <Typography className={classes.title}  sx={{ fontSize: '1rem',fontWeight:600 ,color:'rgba(142, 142, 169, 1)'}} color="text.primary" gutterBottom>
                     {t('recorder.title')}
                 </Typography>
-                <Box sx={{direction:Theme.direction, gap:"3rem", paddingBottom:'3rem'}}>
+                <Box sx={{direction:direction, gap:"3rem", paddingBottom:'3rem'}}>
                     <div className={classes.meetingData}>
                         <div className={classes.meetingDataItem}>
                             <span style={{color:Theme.palette.secondary.main}}>{t("recorder.labels.topic")} : </span>

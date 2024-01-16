@@ -23,6 +23,8 @@ i18n
     backend:{
       loadPath: `${process.env.NODE_ENV === 'development' ? '' : '.'}/locales/{{lng}}/{{ns}}.json`
     },
+    //@ts-ignore
+    lng: window.BASE_CONFIG.defaultLanguage,
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     }

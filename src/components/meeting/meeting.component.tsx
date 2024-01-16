@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardActions, CardContent, Divider, IconButton, TextField, Typography } from "@mui/material"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context"
 import { Theme } from "../../theme/theme";
@@ -15,7 +15,7 @@ import { Participant } from "../../models/base.model";
 
 const Meeting = ()=>{
     const { state, dispatch } = useContext(AppContext);
-    const { t } = useTranslation(['translation']);
+    const { t,i18n } = useTranslation(['translation']);
     const navigate = useNavigate();
     const [topic , setTopic] = useState("")
     const [purpose , setPurpose] = useState("")
@@ -24,7 +24,7 @@ const Meeting = ()=>{
     const [newParticipant , setNewParticipant] = useState<Participant>({name: "", position: "",email: ""})
     const [validator , setValidator] = useState(initialValidationObject)
     // console.log("MEETING COMP ->",state)
-
+    const direction = i18n.dir(i18n.language)
     const setMeetingTopic = (value: string)=>{
         setTopic(value)
         dispatch({type:"CHANGE_MEETING_TOPIC", payload:value})
@@ -107,11 +107,11 @@ const Meeting = ()=>{
         }
     }
     return (
-        <Box sx={{direction:Theme.direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <Box sx={{direction:direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
             <div className="meeting">
             <Card className={classes.cardWrapper} sx={{width:"90vw", height:"80vh",overflowY:"auto",padding:"1rem", border:"1px solid #86898A", borderRadius:"4px"}}>
                 <CardContent>
-                    <Box className={classes.responsiveBox} sx={{display:"grid",gridTemplateColumns:"1fr 2fr" ,direction:Theme.direction, gap:"3rem"}}>
+                    <Box className={classes.responsiveBox} sx={{display:"grid",gridTemplateColumns:"1fr 2fr" ,direction:direction, gap:"3rem"}}>
                         <div className={classes.rightFormPanelWrapper}>
                             <Typography sx={{ fontSize: '2rem',fontWeight:600 ,color:Theme.palette.text.primary}} color="text.primary" gutterBottom>
                                 {t('meeting.createTitle')}
