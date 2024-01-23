@@ -7,6 +7,7 @@ import classes from './meeting.module.scss'
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
 import MailIcon from '@mui/icons-material/Mail';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import WorkIcon from '@mui/icons-material/Work';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
@@ -21,7 +22,7 @@ const Meeting = ()=>{
     const [purpose , setPurpose] = useState("")
     const [leader , setLeader] = useState("")
     const [transcriptor , setTranscriptor] = useState("")
-    const [newParticipant , setNewParticipant] = useState<Participant>({name: "", position: "",email: ""})
+    const [newParticipant , setNewParticipant] = useState<Participant>({name: "", position: "",rank:""})
     const [validator , setValidator] = useState(initialValidationObject)
     // console.log("MEETING COMP ->",state)
     const direction = i18n.dir(i18n.language)
@@ -42,34 +43,34 @@ const Meeting = ()=>{
         dispatch({type:"CHANGE_MEETING_TRANSCRIPTOR", payload:value})
         validateFields(value , 'transcriptor')
     }
-    const addNewParticipant = (attr:'name'|'email'|'position', value:string)=>{
+    const addNewParticipant = (attr:'name'|'email'|'position'|'rank', value:string)=>{
         const participant = {...newParticipant}
         participant[attr] = value
         setNewParticipant({...participant})
-        if(attr == 'email') validateFields(value , 'participant-email')
+        if(attr === 'email') validateFields(value , 'participant-email')
         
     }
     const setMeetingParticipants = ()=>{
         dispatch({type:"ADD_MEETING_RECIPIANTS", payload:newParticipant})
-        setNewParticipant({name: "", position: "",email: ""})
+        setNewParticipant({name: "", position: "",rank: ""})
     }
 
     const isSubmitButtonDisabled = ()=>{
         let isDisabled = true
         if(topic && purpose && leader && transcriptor){
-            if(validator.transcriptor.error == false) isDisabled = false 
-            if(validator.transcriptor.error == true) isDisabled = true 
+            if(validator.transcriptor.error === false) isDisabled = false 
+            if(validator.transcriptor.error === true) isDisabled = true 
         } 
         return isDisabled
     }
 
     const isAddParticipantButtonDisabled = ()=>{
-        const {name,email,position} = newParticipant;
+        const {name,rank,position} = newParticipant;
         let isDisabled = true
-        if(name && email && position){
+        if(name && rank && position){
             isDisabled = false
-            if(validator.participnatEmail.error == false) isDisabled = false
-            if(validator.participnatEmail.error == true) isDisabled = true
+            if(validator.participnatEmail.error === false) isDisabled = false
+            if(validator.participnatEmail.error === true) isDisabled = true
         } 
         return isDisabled
     }
@@ -90,19 +91,24 @@ const Meeting = ()=>{
 
     const validateFields = (value: string,name: string)=>{
         const validateObj = {...validator}
-        if(name == 'topic'){
+        if(name === 'topic'){
             const valid = Validator.topic.validate(value)
             validateObj.topic = {...validateObj.topic,error:valid?.error, helperText:valid?.helperText}
             setValidator(validateObj)
         }
-        if(name == 'transcriptor'){
+        if(name === 'transcriptor'){
             const valid = Validator.transcriptor.validate(value)
             validateObj.transcriptor = {...validateObj.transcriptor,error:valid?.error, helperText:valid?.helperText}
             setValidator(validateObj)
         }
-        if(name == 'participant-email'){
+        if(name === 'participant-email'){
             const valid = Validator.participnatEmail.validate(value)
             validateObj.participnatEmail = {...validateObj.participnatEmail,error:valid?.error, helperText:valid?.helperText}
+            setValidator(validateObj)
+        }
+        if(name === 'rank'){
+            const valid = Validator.transcriptor.validate(value)
+            validateObj.rank = {...validateObj.rank,error:valid?.error, helperText:valid?.helperText}
             setValidator(validateObj)
         }
     }
@@ -150,20 +156,18 @@ const Meeting = ()=>{
                             <Box sx={{display:"flex", width:'100%', gap:"1rem"}} className={classes.newParticipantInputWrapper}>
                                 <Box sx={{display:"block", flexBasis:"90%"}} className={classes.newParticipantInputWrapper}>
                                     <div className={classes.newParticipantInput}>
-                                        <TextField sx={{paddingTop:"1rem", flexBasis:"50%"}} value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="filled" />
-                                        <TextField sx={{paddingTop:"1rem", flexBasis:"50%"}} value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="filled" />
-                                    </div>
-                                    <div className={classes.newParticipantInput}>
+                                        <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} value={newParticipant.name} onChange={(e)=>addNewParticipant('name',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.name")} variant="filled" />
+                                        <TextField sx={{paddingTop:"1rem", flexBasis:"30%"}} value={newParticipant.position} onChange={(e)=>addNewParticipant('position',e.target.value)} className={classes.inputText} id="meeting-topic" label={t("meeting.labels.new-participant.position")} variant="filled" />
                                         <TextField 
-                                            sx={{paddingTop:"1rem", flexBasis:"100%"}} 
+                                            sx={{paddingTop:"1rem", flexBasis:"30%"}} 
                                             helperText={validator.participnatEmail.helperText} 
                                             error={validator.participnatEmail.error}  
                                             value={newParticipant.email} 
-                                            onBlur={(e)=>onBlurHandler(e.target.value , 'participant-email')}  
-                                            onChange={(e)=>addNewParticipant('email',e.target.value)} 
+                                            onBlur={(e)=>onBlurHandler(e.target.value , 'rank')}  
+                                            onChange={(e)=>addNewParticipant('rank',e.target.value)} 
                                             className={classes.inputText} 
                                             id="meeting-topic" 
-                                            label={t("meeting.labels.new-participant.email")} 
+                                            label={t("meeting.labels.new-participant.rank")} 
                                             variant="filled" />
                                     </div>
                                 </Box>
@@ -186,8 +190,8 @@ const Meeting = ()=>{
                                                 </div> 
                                                 
                                                 <div className={classes.participantsListItemContent}> 
-                                                    <MailIcon /> 
-                                                    <div>{item.email}</div> 
+                                                    <MilitaryTechIcon /> 
+                                                    <div>{item.rank}</div> 
                                                     <Divider sx={{justifySelf:"flex-end"}} orientation="vertical"/>
                                                 </div> 
                                                 

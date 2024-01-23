@@ -11,7 +11,8 @@
             "new-participant" : {
                 "name" : "שם מלא",
                 "email" : "כתובת אימייל",
-                "position" : "תפקיד"
+                "position" : "תפקיד",
+                "rank": "דרגה"
             }
         },
         "create-meeting":"יצירת דיון"

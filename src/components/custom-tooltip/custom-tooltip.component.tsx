@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import React from "react";
 import PersonIcon from '@mui/icons-material/Person';
 import MailIcon from '@mui/icons-material/Mail';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import WorkIcon from '@mui/icons-material/Work';
 import classes from './custom-tooltip.module.scss'
 import { Theme } from "../../theme/theme";
@@ -15,8 +16,8 @@ const CustomTooltip = styled(({ className, data, ...props }: any) => (
                 <Typography color="inherit">{data.name}</Typography>
             </Box>
             <Box sx={{display:"flex", gap:"1rem"}}>
-                <MailIcon /> 
-                <Typography color="inherit">{data.email}</Typography>
+                <MilitaryTechIcon /> 
+                <Typography color="inherit">{data.rank}</Typography>
             </Box>
             <Box sx={{display:"flex", gap:"1rem"}}>
                 <WorkIcon /> 

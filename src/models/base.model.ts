@@ -1,7 +1,8 @@
 export interface Participant {
     name:string;
     position:string;
-    email:string;
+    email?:string;
+    rank:string
 }
 export interface Clip {
     start:number;

@@ -15,6 +15,11 @@ export const initialValidationObject = {
         required: false,
         helperText:'',
         emailField:true
+    },
+    rank:{
+        error:false,
+        required: true,
+        helperText:''
     }
 }
 interface ValidationResponse{
@@ -69,6 +74,19 @@ export const Validator = {
                 if(/^[a-zA-Z0-9]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/.test(value) == false){
                     validatorResponse =  {error: true , helperText: Validator.transcriptor.helperText}
                 }
+            }
+            return validatorResponse
+        }
+    },
+    rank:{
+        error:false,
+        required: true,
+        helperText:'This field is required',
+        validate:<ValidationResponse> (value:string)=>{
+            let validatorResponse = {error: true, helperText:''}
+            if(Validator.rank.required){
+                if(value !== "") validatorResponse =  {error: false , helperText: ''}
+                if(value === "") validatorResponse =  {error: true , helperText: Validator.rank.helperText}
             }
             return validatorResponse
         }
