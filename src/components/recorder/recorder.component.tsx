@@ -39,29 +39,21 @@ const Recorder = ()=>{
         //@ts-ignore
         const type = window.BASE_CONFIG.useClips === true ? "introduction" : ''
         dispatch({type:"START_INTRODUCTION", payload:{status:{recording:true , type:type}}})
-        if(!isNotificationShown){
-            const notification = await PushNotification.sendNotification() as Notification
-            setIsNotificationShown(true)
-            setNotificationObject(notification)
-        }
+        sendNotification()
     }
     const stopRecording = ()=>{
          //@ts-ignore
         if(window.BASE_CONFIG.useClips !== true){
             guiStop('')
             dispatch({type:"STOP_RECORDING", payload:{status:{recording:false , type:"introduction"}}})
-            setIsNotificationShown(false)
-            if(notificationObject !== null) notificationObject.close()
-            
+            removeNotification()
             return
-
         } 
         const taskClip = state.meeting.clips.find((clip:Clip)=>clip.name === "task");
         if(taskClip) guiStop("task")
         if(!taskClip) guiStop("summary")
         dispatch({type:"STOP_RECORDING", payload:{status:{recording:false , type:"introduction"}}})
-        setIsNotificationShown(false)
-        if(notificationObject !== null) notificationObject.close()
+        removeNotification()    
     }
     const saveIntroAndstartRecordingSummary = ()=>{
         const clips:Clip[] = saveClip("introduction")
@@ -77,6 +69,18 @@ const Recorder = ()=>{
         const clips:Clip[] = saveClip("task")
         console.log("SAVE TASK -> "  , clips)
         dispatch({type:"START_TASK", payload:{status:{recording:true , type:"task"}, clips:clips}})
+    }
+
+    const sendNotification = async ()=>{
+        if(!isNotificationShown){
+            const notification = await PushNotification.sendNotification() as Notification
+            setIsNotificationShown(true)
+            setNotificationObject(notification)
+        }
+    }
+    const removeNotification = ()=>{
+        setIsNotificationShown(false)
+        if(notificationObject !== null) notificationObject.close()
     }
     const renderClipsButton = ()=>{
         if(state.recorder.status.recording !== true) return <></>
