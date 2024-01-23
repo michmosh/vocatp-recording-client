@@ -48,10 +48,11 @@ const Recorder = ()=>{
     const stopRecording = ()=>{
          //@ts-ignore
         if(window.BASE_CONFIG.useClips !== true){
-            saveClip('')
+            guiStop('')
             dispatch({type:"STOP_RECORDING", payload:{status:{recording:false , type:"introduction"}}})
             setIsNotificationShown(false)
             if(notificationObject !== null) notificationObject.close()
+            
             return
 
         } 
