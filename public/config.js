@@ -6,6 +6,7 @@ var BASE_CONFIG = {
     sttServerToken : '???',
     resultServerToken : '121212',
     lexiconServerToken : '121212',
-    defaultLanguage: 'he'
+    defaultLanguage: 'he',
+    useClips: false
 }
 

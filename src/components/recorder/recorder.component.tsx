@@ -16,6 +16,8 @@ import CustomTooltip from "../custom-tooltip/custom-tooltip.component";
 import React from "react";
 import MuteButton from "../mute-button/mute-button.component";
 import { Clip } from "../../models/base.model";
+
+import { PushNotification } from "../../utils/notifications";
 const Recorder = ()=>{
     const { t,i18n } = useTranslation(['translation']);
     const { state, dispatch } = useContext(AppContext);
@@ -25,22 +27,40 @@ const Recorder = ()=>{
     const [showRecordingEndDialog , setShowRecordingEndDialog] = useState(false)
     const [meetingDuration , setMeetingDuration] = useState(0);
     const [participantsIndex , setParticipantsIndex] = useState(10);
+    const [isNotificationShown , setIsNotificationShown] = useState(false)
+    const [notificationObject , setNotificationObject] = useState<Notification|null>(null)
     // console.log("RECORDER COMP -> ", state)
     const direction = i18n.dir(i18n.language)
 
-    const startRecording = ()=>{
+    const startRecording = async ()=>{
         const meeting = state.meeting
         meeting.date = new Date().toLocaleDateString('he-il')
         guiStart(meeting)
-        // dispatch({type:"START_RECORDING", payload:{status:{recording:true , type:"introduction"}}})
-        dispatch({type:"START_INTRODUCTION", payload:{status:{recording:true , type:"introduction"}}})
-        
+        //@ts-ignore
+        const type = window.BASE_CONFIG.useClips === true ? "introduction" : ''
+        dispatch({type:"START_INTRODUCTION", payload:{status:{recording:true , type:type}}})
+        if(!isNotificationShown){
+            const notification = await PushNotification.sendNotification() as Notification
+            setIsNotificationShown(true)
+            setNotificationObject(notification)
+        }
     }
     const stopRecording = ()=>{
-        const taskClip = state.meeting.clips.find((clip:Clip)=>clip.name == "task");
+         //@ts-ignore
+        if(window.BASE_CONFIG.useClips !== true){
+            saveClip('')
+            dispatch({type:"STOP_RECORDING", payload:{status:{recording:false , type:"introduction"}}})
+            setIsNotificationShown(false)
+            if(notificationObject !== null) notificationObject.close()
+            return
+
+        } 
+        const taskClip = state.meeting.clips.find((clip:Clip)=>clip.name === "task");
         if(taskClip) guiStop("task")
         if(!taskClip) guiStop("summary")
         dispatch({type:"STOP_RECORDING", payload:{status:{recording:false , type:"introduction"}}})
+        setIsNotificationShown(false)
+        if(notificationObject !== null) notificationObject.close()
     }
     const saveIntroAndstartRecordingSummary = ()=>{
         const clips:Clip[] = saveClip("introduction")
@@ -60,7 +80,7 @@ const Recorder = ()=>{
     const renderClipsButton = ()=>{
         if(state.recorder.status.recording !== true) return <></>
         // console.log("RECORDING TYPE -> ", state.recorder.status)
-        if(state.recorder.status.type == "introduction"){
+        if(state.recorder.status.type === "introduction"){
             return (
                 <Button onClick={saveIntroAndstartRecordingSummary} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
                     <AddIcon sx={{paddingLeft:"0.5rem"}}/>
@@ -68,7 +88,7 @@ const Recorder = ()=>{
                 </Button>
             )
         }
-        if(state.recorder.status.type == "summary"){
+        if(state.recorder.status.type === "summary"){
             return (
                 <Button onClick={saveSummaryAndstartRecordingTask} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
                     <AddIcon sx={{paddingLeft:"0.5rem"}}/>
@@ -76,7 +96,7 @@ const Recorder = ()=>{
                 </Button>
             )
         }
-        if(state.recorder.status.type == "task"){
+        if(state.recorder.status.type === "task"){
             return (
                 <Button  onClick={saveTaskandstartRecordingTask} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
                     <AddIcon sx={{paddingLeft:"0.5rem"}}/>
@@ -124,7 +144,6 @@ const Recorder = ()=>{
                 setRecordingStart(false)
                 setRecordingStartTime(new Date().toISOString())
             })
-            
         } 
     })
     return (
@@ -219,11 +238,21 @@ const Recorder = ()=>{
                     <Divider orientation="vertical" flexItem />
                     <MuteButton/>
                     {
+                        //@ts-ignore
+                        window.BASE_CONFIG.useClips === true?
                         renderClipsButton()
+                        :
+                        <></>
                     }
                     {/* <Button onClick={()=>setShowRecordingEndDialog(true)}> open</Button> */}
                 </Box>
-                <RecordingProgress />
+                {
+                    //@ts-ignore
+                    window.BASE_CONFIG.useClips === true?
+                    <RecordingProgress />:
+                    <></>
+                }
+                
             </CardContent>
             </Card>
            

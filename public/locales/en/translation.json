@@ -1,42 +1,42 @@
 {
     "meeting" : {
-        "createTitle" : "יצירת פגישה חדשה",
+        "createTitle" : "יצירת דיון חדש",
         "add-participants-tite" : "הוספת משתמשים ",
         "labels":{
-            "topic" : "נושא הפגישה",
-            "purpose" : "מטרת הפגישה",
-            "leader" : "שם מלא של מוביל הפגישה",
+            "topic" : "נושא הדיון",
+            "purpose" : "מטרת הדיון",
+            "leader" : "שם מלא של מוביל הדיון",
             "transcriptor" : "כתובת אימייל של עורך התמלול",
-            "participants" : "משתתפי הפגישה",
+            "participants" : "משתתפי הדיון",
             "new-participant" : {
                 "name" : "שם מלא",
                 "email" : "כתובת אימייל",
                 "position" : "תפקיד"
             }
         },
-        "create-meeting":"יצירת פגישה"
+        "create-meeting":"יצירת דיון"
     },
     "recorder": {
-        "title": "פרטי הפגישה",
+        "title": "פרטי הדיון",
         "labels":{
-            "topic" : "נושא הפגישה",
-            "purpose" : "מטרת הפגישה",
-            "leader" : "מוביל הפגישה",
+            "topic" : "נושא הדיון",
+            "purpose" : "מטרת הדיון",
+            "leader" : "מוביל הדיון",
             "transcriptor" : "כתובת אימייל של עורך התמלול",
-            "participants" : "משתתפי הפגישה"
+            "participants" : "משתתפי הדיון"
         },
         "participants-show":{
             "show-more":"פתח רשימה",
             "show-less":"סגור רשימה"
         },
-        "start-record-button": "התחל הקלטת פגישה",
-        "stop-record-button": "סיום הקלטת פגישה",
-        "recording-summary": "סיכום הפגישה",
+        "start-record-button": "התחל הקלטת דיון",
+        "stop-record-button": "סיום הקלטת דיון",
+        "recording-summary": "סיכום הדיון",
         "recording-introduction": "מילות פתיחה",
         "recording-task": "הוספת מטלה",
         "recording-dialog":{
-            "title": "הפגישה הסתיימה", 
-            "duration-label":"משך זמן הפגישה",
+            "title": "הדיון הסתיים", 
+            "duration-label":"משך זמן הדיון",
             "success-message":"העלאה בוצעה בהצלחה",
             "warning-message":"מעלה את הקבצים לשרת, אל תסגור את הדפדפן עד לסיום העלאה",
             "uploading-message":"מעלה את ההקלטה",
@@ -44,7 +44,7 @@
             "close-button":"סיום"
         },
         "recording-progress":{
-            "title":"שלבי הפגישה",
+            "title":"שלבי הדיון",
             "current-stage" : "השלב הנוכחי",
             "status" : "הוקלט בהצלחה",
             "current-stage-introduction" : "הקדמה",

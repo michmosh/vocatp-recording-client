@@ -8,6 +8,7 @@ import Recorder from './components/recorder/recorder.component';
 import { AppContext,AppProvider } from './context/default.context';
 import { Theme } from './theme/theme';
 import Header from './components/header/header.component';
+import { Notifications } from 'react-push-notification';
 
 function App() {
   const {state , dispatch} = useContext(AppContext)
@@ -16,6 +17,7 @@ function App() {
     <AppProvider>
       <ThemeProvider theme={Theme}>
         <HashRouter>
+          <Notifications />
          <Header />
           <Routes>
             <Route path="/" element={<Navigate to="meeting" replace/>} />
