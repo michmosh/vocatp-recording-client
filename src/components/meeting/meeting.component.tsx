@@ -172,7 +172,7 @@ const Meeting = ()=>{
                                     </div>
                                 </Box>
                                 <Box sx={{paddingTop:"1rem"}}>
-                                    <Button disabled={isAddParticipantButtonDisabled()} className={classes.addParticipantButton} sx={{color:Theme.palette.text.primary,background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants}  variant="contained">
+                                    <Button disabled={isAddParticipantButtonDisabled()} className={classes.addParticipantButton} sx={{background:"rgba(33, 150, 243, 1)"}} onClick={setMeetingParticipants}  variant="contained">
                                         <AddIcon/>
                                     </Button>
                                 </Box>

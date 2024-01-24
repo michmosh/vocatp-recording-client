@@ -12,7 +12,7 @@ const MuteButton = ()=>{
     const { state, dispatch } = useContext(AppContext);
 
     const onMuteMicrophone = ()=>{
-        if(state.recorder.status.recording == true){
+        if(state.recorder.status.recording === true){
             const isMute = guiToggleMute()
             if(!isMute) dispatch({type:"RECORDER_UNMUTED"})
             if(isMute) dispatch({type:"RECORDER_MUTED"})
@@ -20,20 +20,20 @@ const MuteButton = ()=>{
     }
 
     const renderMicrophoneButton = ()=>{
-        if(state.recorder.status.recording == true){
-            if(state.recorder.microphoneStatus == 'unmuted'){
+        if(state.recorder.status.recording === true){
+            if(state.recorder.microphoneStatus === 'unmuted'){
                 return <MicIcon sx={{color:"rgba(60, 168, 255, 1)"}}/> 
             }
-            if(state.recorder.microphoneStatus == 'muted'){
+            if(state.recorder.microphoneStatus === 'muted'){
                 return <MicOffIcon sx={{color:"rgba(255, 160, 0, 1)"}}/> 
             }
         }
-        return <MicIcon /> 
+        return <MicIcon sx={{color:"grey"}}/> 
     }
 
     const renderTolltipText = ()=>{
-        if(state.recorder.microphoneStatus == 'muted') return t("recorder.microphone-button.unmute")
-        if(state.recorder.microphoneStatus == 'unmuted') return t("recorder.microphone-button.mute")
+        if(state.recorder.microphoneStatus === 'muted') return t("recorder.microphone-button.unmute")
+        if(state.recorder.microphoneStatus === 'unmuted') return t("recorder.microphone-button.mute")
         return t("recorder.microphone-button.mute")
     }
 
@@ -43,9 +43,15 @@ const MuteButton = ()=>{
                 <Box sx={{padding:"1rem"}}>{renderTolltipText()}</Box>
             </React.Fragment>
         }>
-            <Button onClick={onMuteMicrophone} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
+            <span>
+            <Button 
+                disabled={state.recorder.status.recording!== true} 
+                onClick={onMuteMicrophone} 
+                sx={{background :"transparent",width:'4.5rem',height:'3rem', ":hover":{background:"rgb(105 103 103 70%)"}}} 
+                variant="outlined">
                 {renderMicrophoneButton()}
             </Button>
+            </span>
         </Tooltip>
     )
    

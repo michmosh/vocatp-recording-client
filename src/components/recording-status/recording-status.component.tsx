@@ -36,7 +36,7 @@ const RecordingStatus = ()=>{
     const renderSnackBarIcon = ()=>{
         if(status === STATUS_ENUM.STT_SERVER_CONNETCED || status === STATUS_ENUM.STT_SERVER_ERROR ) return <WifiIcon />
         if(status === STATUS_ENUM.MICROPHONE_CONNETCED || status === STATUS_ENUM.MICROPHONE_ERROR) return <MicIcon />
-        return <></>
+        return <div></div>
     }
     const reconnectMic = ()=>{
         startMicrophone()
@@ -76,7 +76,7 @@ const RecordingStatus = ()=>{
             // window.removeEventListener("onMicrophneDisconect" , (data)=> setStatus(""))
         }
     })
-    if(status == "" || state.recorder.status.recording !== true) return <></>
+    if(status == "" || state.recorder.status.recording !== true) return <div></div>
     return (
         <Box sx={{display:"flex", justifyContent:"center"}}>
         <SnackbarContent sx={{ justifyContent:"center"}} className={getSnackBarClassName()} message={

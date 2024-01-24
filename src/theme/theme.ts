@@ -12,11 +12,11 @@ export const themeOptions: ThemeOptions = {
         main: 'rgba(142, 142, 169, 1)',
       },
       background: {
-        default: 'rgba(59, 66, 84, 1)',
-        paper: "rgba(45, 50, 63, 0.78)"
+        default: 'rgba(255, 255, 255, 1)',
+        paper: 'rgba(246, 246, 249, 1)'
       },
       text:{
-        primary:"rgba(246, 242, 228, 1)",
+        primary:"rgba(142, 142, 169, 1)",
       }
     },
     typography: {
@@ -57,11 +57,17 @@ export const themeOptions: ThemeOptions = {
       MuiTextField:{
         styleOverrides: {
           root: {
+            '& label':{
+              color:'rgba(142, 142, 169, 1)'
+            },
             '& label.Mui-focused': {
-              color: 'rgba(0, 255, 255, 1)',
+              color: 'rgba(33, 150, 243, 1)',
             },
             '& .MuiFilledInput-underline.Mui-focused:after, .MuiFilledInput-underline.Mui-focused:before' :{
-              borderBottomColor: "rgba(0, 255, 255, 1)"
+              borderBottomColor: "rgba(33, 150, 243, 1)"
+            },
+            '& .MuiFilledInput-root':{
+              backgroundColor:'rgba(255, 255, 255, 1)'
             }
           },
         },
@@ -80,7 +86,8 @@ export const themeOptions: ThemeOptions = {
           root:{
             background : "linear-gradient(90deg, rgba(86, 170, 255, 1) 0%, rgba(134, 54, 255, 1) 100%);",
             "&.Mui-disabled":{
-              background:'rgba(255, 255, 255, 0.12)'
+              background:'rgba(80, 93, 111, 0.12)',
+              color:'rgba(80, 93, 111, 0.26)'
             },
             color:"rgba(246, 242, 228, 1)" 
           }
@@ -89,7 +96,10 @@ export const themeOptions: ThemeOptions = {
       MuiChip:{
         styleOverrides:{
           root:{
-            borderRadius:"4px"
+            borderRadius:"4px",
+            border:'2px solid rgba(33, 150, 243, 1)',
+            borderColor:'rgba(33, 150, 243, 1)',
+            color:'rgba(33, 150, 243, 1)'
           }
         }
       },
@@ -127,6 +137,13 @@ export const themeOptions: ThemeOptions = {
             "&::before":{
               backgroundColor: 'rgba(80, 93, 111, 1)'
             }
+          }
+        }
+      },
+      MuiDivider:{
+        styleOverrides:{
+          root:{
+            borderColor:'rgba(142, 142, 169, 1)'
           }
         }
       }

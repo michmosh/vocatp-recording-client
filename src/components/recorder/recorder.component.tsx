@@ -154,7 +154,7 @@ const Recorder = ()=>{
     return (
         <Box className={classes.wrapperBox} sx={{direction:direction, minHeight:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
         <div className="recorder">
-            <Card sx={{backgroundColor:Theme.palette.background.default,width:"70vw", padding:"1rem"}}>
+            <Card sx={{backgroundColor:Theme.palette.background.paper,width:"70vw", padding:"1rem"}}>
             <CardContent sx={{padding:"4rem"}}>
                 <Typography className={classes.title}  sx={{ fontSize: '1rem',fontWeight:600 ,color:'rgba(142, 142, 169, 1)'}} color="text.primary" gutterBottom>
                     {t('recorder.title')}
@@ -210,7 +210,7 @@ const Recorder = ()=>{
                 <Box sx={{backgroundColor: Theme.palette.background.paper, padding:'2rem', display:"flex", justifyContent:"space-evenly", alignItems:"center"}}>
                     {
                     state.recorder.status.recording == false ? 
-                    <Button variant="outlined" onClick={startRecording} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
+                    <Button variant="outlined" onClick={startRecording} sx={{background :"rgba(240, 86, 86, 1)", width:'15.5rem', ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
                         <Radio
                             checked={true}
                             value="a"

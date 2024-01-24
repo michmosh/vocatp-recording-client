@@ -7,6 +7,9 @@ var BASE_CONFIG = {
     resultServerToken : '121212',
     lexiconServerToken : '121212',
     defaultLanguage: 'he',
-    useClips: false
+    useClips: false,
+    primaryIcon :'./img/IAF.svg',
+    secondaryIcon:'img/tikshuv.svg'
+
 }
 
