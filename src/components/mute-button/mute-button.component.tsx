@@ -22,13 +22,13 @@ const MuteButton = ()=>{
     const renderMicrophoneButton = ()=>{
         if(state.recorder.status.recording === true){
             if(state.recorder.microphoneStatus === 'unmuted'){
-                return <MicIcon sx={{color:"rgba(60, 168, 255, 1)"}}/> 
+                return <MicIcon sx={{color:"rgba(60, 168, 255, 1)", fontSize:"6em"}}/> 
             }
             if(state.recorder.microphoneStatus === 'muted'){
-                return <MicOffIcon sx={{color:"rgba(255, 160, 0, 1)"}}/> 
+                return <MicOffIcon sx={{color:"rgba(255, 160, 0, 1)", fontSize:"6em"}}/> 
             }
         }
-        return <MicIcon sx={{color:"grey"}}/> 
+        return <MicIcon sx={{color:"grey", fontSize:"6em"}}/> 
     }
 
     const renderTolltipText = ()=>{
@@ -47,7 +47,7 @@ const MuteButton = ()=>{
             <Button 
                 disabled={state.recorder.status.recording!== true} 
                 onClick={onMuteMicrophone} 
-                sx={{background :"transparent",width:'4.5rem',height:'3rem', ":hover":{background:"rgb(105 103 103 70%)"}}} 
+                sx={{background :"transparent",width:'10.5rem',height:'10.5rem',borderRadius:"50%", ":hover":{background:"rgb(105 103 103 70%)"}}} 
                 variant="outlined">
                 {renderMicrophoneButton()}
             </Button>

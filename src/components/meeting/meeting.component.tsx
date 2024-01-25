@@ -1,12 +1,11 @@
-import { Box, Button, Card, CardActions, CardContent, Divider, IconButton, TextField, Typography } from "@mui/material"
-import { useContext, useEffect, useMemo, useState } from "react"
+import { Box, Button, Card, CardActions, CardContent, Divider, TextField, Typography } from "@mui/material"
+import { useContext, useState } from "react"
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context"
 import { Theme } from "../../theme/theme";
 import classes from './meeting.module.scss'
 import AddIcon from '@mui/icons-material/Add';
 import PersonIcon from '@mui/icons-material/Person';
-import MailIcon from '@mui/icons-material/Mail';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import WorkIcon from '@mui/icons-material/Work';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -41,7 +40,7 @@ const Meeting = ()=>{
     const setMeetingTranscriptor = (value: string)=>{
         setTranscriptor(value)
         dispatch({type:"CHANGE_MEETING_TRANSCRIPTOR", payload:value})
-        validateFields(value , 'transcriptor')
+        // validateFields(value , 'transcriptor')
     }
     const addNewParticipant = (attr:'name'|'email'|'position'|'rank', value:string)=>{
         const participant = {...newParticipant}
@@ -86,7 +85,11 @@ const Meeting = ()=>{
         dispatch({type:"REMOVE_MEETING_RECIPIANTS", payload:recipients})
     }
     const onBlurHandler = (value: string,name: string)=>{
-        validateFields(value , name)
+        if(name === 'transcriptor') {
+            if(/@idf.iaf.il/.test(value)) setTranscriptor(value)
+            else setTranscriptor(`${value}@idf.iaf.il`)
+        }
+        validateFields(`${value}@idf.iaf.il` , name)
     }
 
     const validateFields = (value: string,name: string)=>{

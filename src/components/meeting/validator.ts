@@ -35,7 +35,7 @@ export const Validator = {
             let validatorResponse = {error: true, helperText:''}
             if(Validator.topic.required){
                 if(value !== "") validatorResponse =  {error: false , helperText: ''}
-                if(value == "") validatorResponse =  {error: true , helperText: Validator.topic.helperText}
+                if(value === "") validatorResponse =  {error: true , helperText: Validator.topic.helperText}
             }
             return validatorResponse
         }
@@ -49,10 +49,10 @@ export const Validator = {
             let validatorResponse = {error: true, helperText:''}
             if(Validator.topic.required){
                 if(value !== "") validatorResponse =  {error: false , helperText: ''}
-                if(value == "") validatorResponse =  {error: true , helperText: Validator.topic.helperText}
+                if(value === "") validatorResponse =  {error: true , helperText: Validator.topic.helperText}
             }
             if(Validator.transcriptor.emailField == true){
-                if(/^[a-zA-Z0-9]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/.test(value) == false){
+                if(/^[a-zA-Z0-9]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/.test(value) === false){
                     validatorResponse =  {error: true , helperText: Validator.transcriptor.helperText}
                 }
             }
@@ -68,10 +68,10 @@ export const Validator = {
             let validatorResponse = {error: true, helperText:''}
             if(Validator.topic.required){
                 if(value !== "") validatorResponse =  {error: false , helperText: ''}
-                if(value == "") validatorResponse =  {error: true , helperText: Validator.topic.helperText}
+                if(value === "") validatorResponse =  {error: true , helperText: Validator.topic.helperText}
             }
-            if(Validator.transcriptor.emailField == true){
-                if(/^[a-zA-Z0-9]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/.test(value) == false){
+            if(Validator.transcriptor.emailField === true){
+                if(/^[a-zA-Z0-9]+[a-zA-Z0-9_.]+@[a-zA-Z.]+[a-zA-Z]$/.test(value) === false){
                     validatorResponse =  {error: true , helperText: Validator.transcriptor.helperText}
                 }
             }

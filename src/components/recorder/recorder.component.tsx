@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Typography, Chip, Button, Radio, Divider } from "@mui/material";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AppContext } from "../../context/default.context";
 import { Theme } from "../../theme/theme";
@@ -105,7 +105,7 @@ const Recorder = ()=>{
             return (
                 <Button  onClick={saveTaskandstartRecordingTask} sx={{background :"transparent", ":hover":{background:"rgb(105 103 103 70%)"}}} variant="outlined">
                     <AddIcon sx={{paddingLeft:"0.5rem"}}/>
-                    {t("recorder.recording-task") + ` ${state.meeting.clips.filter((clip: any)=>clip.name == "task").length +2}`}
+                    {t("recorder.recording-task") + ` ${state.meeting.clips.filter((clip: any)=>clip.name === "task").length +2}`}
                 </Button>
             )
         }
@@ -210,7 +210,7 @@ const Recorder = ()=>{
                 <Box sx={{backgroundColor: Theme.palette.background.paper, padding:'2rem', display:"flex", justifyContent:"space-evenly", alignItems:"center"}}>
                     {
                     state.recorder.status.recording == false ? 
-                    <Button variant="outlined" onClick={startRecording} sx={{background :"rgba(240, 86, 86, 1)", width:'15.5rem', ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
+                    <Button variant="outlined" onClick={startRecording} sx={{background :"rgba(240, 86, 86, 1)",flexDirection:"column" ,width:'10.5rem',height:'10.5rem',borderRadius:"50%" ,":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
                         <Radio
                             checked={true}
                             value="a"
@@ -221,7 +221,7 @@ const Recorder = ()=>{
                         
                     </Button>
                     :
-                    <Button variant="outlined" onClick={stopRecording} sx={{background :"rgba(240, 86, 86, 1)", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
+                    <Button variant="outlined" onClick={stopRecording} sx={{background :"rgba(240, 86, 86, 1)",flexDirection:"column",width:'10.5rem',height:'10.5rem',borderRadius:"50%", ":hover":{background:"rgba(240, 86, 86, 0.7)"}}}>
                         <Radio
                             checked={true}
                             value="a"
@@ -238,7 +238,7 @@ const Recorder = ()=>{
                         recordingStart ? 
                         <Moment className={classes.momentTime} interval={1000} date={recordingStartTime} durationFromNow format="hh:mm:ss"/>
                         :
-                        <Chip sx={{padding:"1rem", background:"transparent" , border:"1px solid grey"}} label={"00:00:00"}/>
+                        <Chip sx={{fontSize:"2em",padding:"2rem", background:"transparent" , border:"1px solid grey"}} label={"00:00:00"}/>
                     }
                     <Divider orientation="vertical" flexItem />
                     <MuteButton/>
