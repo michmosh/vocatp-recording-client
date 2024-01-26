@@ -1,7 +1,7 @@
 {
     "meeting" : {
         "createTitle" : "יצירת דיון חדש",
-        "add-participants-tite" : "הוספת משתמשים ",
+        "add-participants-tite" : "הוספת משתתפים ",
         "labels":{
             "topic" : "נושא הדיון",
             "purpose" : "מטרת הדיון",

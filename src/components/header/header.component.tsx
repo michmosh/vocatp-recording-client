@@ -1,6 +1,7 @@
-import { AppBar } from "@mui/material"
+import { AppBar, Box } from "@mui/material"
 import logo from '../../assets/img/audiocodes-logo-colored.svg'
 import { Theme } from "../../theme/theme"
+import CustomIcons from "../custom-icons/custom-icons.component"
 import RecordingStatus from "../recording-status/recording-status.component"
 import classes from './header.module.scss'
 const Header = ()=>{
@@ -13,17 +14,7 @@ const Header = ()=>{
             <img className={classes.logoImg} src={logo} alt="audiocodes icon" />
             <RecordingStatus/>
             {/* @ts */}
-            <div className={classes.rightLogoWrapper}>
-                {
-                    secondaryIcon !== undefined ? <img className={classes.rightLogo} alt="icon" src={secondaryIcon} /> : <></>
-                }
-                {
-                    primaryIcon !== undefined ? <img className={classes.rightLogo} alt="icon" src={primaryIcon} /> : <></>
-                }
-                
-                
-                
-            </div>
+            <Box sx={{justifySelf:"flex-end"}}><CustomIcons /></Box>
         </AppBar>
     )
 }

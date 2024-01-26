@@ -11,6 +11,7 @@ import transcriptionImage from '../../assets/img/transcription-image.svg'
 import classes from './end-record-dialog.module.scss'
 import moment from "moment";
 import { useEffect, useState } from "react";
+import CustomIcons from "../custom-icons/custom-icons.component";
 interface Props{
     onClose : ()=> void,
     duration : any,
@@ -124,6 +125,9 @@ const EndRecordDialog = (props:Props)=>{
             </DialogActions>
             <Divider></Divider>
             <div className={classes.dialogFooter}>
+                <div>
+                    <CustomIcons />
+                </div>
                 <img className={classes.logoImg} src={logo} alt="" />
             </div>
         </DialogContent>

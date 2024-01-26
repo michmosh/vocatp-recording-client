@@ -117,7 +117,7 @@ const Meeting = ()=>{
     }
     return (
         <Box sx={{direction:direction, height:"100vh",background:Theme.palette.background.default, display:"flex", justifyContent:"center", alignItems:"center"}}>
-            <div className="meeting">
+            <div className={classes.meeting}>
             <Card className={classes.cardWrapper} sx={{width:"90vw", height:"80vh",overflowY:"auto",padding:"1rem", border:"1px solid #86898A", borderRadius:"4px"}}>
                 <CardContent>
                     <Box className={classes.responsiveBox} sx={{display:"grid",gridTemplateColumns:"1fr 2fr" ,direction:direction, gap:"3rem"}}>
